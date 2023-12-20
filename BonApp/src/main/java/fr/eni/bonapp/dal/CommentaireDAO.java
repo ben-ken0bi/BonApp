@@ -1,0 +1,12 @@
+package fr.eni.bonapp.dal;
+
+import fr.eni.bonapp.bo.Commentaire;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface CommentaireDAO {
+    Optional<Commentaire> chercherCommentaireParId(long idCommentaire);
+    List<Commentaire> listerCommentairesParRecetteId(long idRecette);
+
+}
