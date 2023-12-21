@@ -8,9 +8,6 @@ import org.springframework.core.io.FileSystemResource;
 @Configuration
 class AppConfig {
 
-    private AppConfig(){
-        throw new IllegalStateException("Classe de configuration");
-    }
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
