@@ -31,7 +31,7 @@ public class CategorieDAOImpl implements CategorieDAO{
         } catch (DataAccessException dae) {
             System.out.println("Erreur chercherCategorieParId");
         }
-        return optCategorie;
+        return optCategorie ;
     }
 
     @Override
