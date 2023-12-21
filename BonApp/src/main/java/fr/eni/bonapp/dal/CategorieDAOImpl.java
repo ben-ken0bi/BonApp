@@ -1,8 +1,9 @@
 package fr.eni.bonapp.dal;
 
 import fr.eni.bonapp.bo.Categorie;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import java.util.Optional;
 @Repository
 public class CategorieDAOImpl implements CategorieDAO{
     private JdbcTemplate jdbcTemplate;
-
+    Logger logger = LoggerFactory.getLogger(CategorieDAOImpl.class);
     public CategorieDAOImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -27,17 +28,16 @@ public class CategorieDAOImpl implements CategorieDAO{
         try {
             Categorie categorie = jdbcTemplate.queryForObject(sql,
                     (ResultSet rs, int rowNum) -> new Categorie(rs.getLong(1), rs.getString(2)));
-            optCategorie = optCategorie.of(categorie);
+            optCategorie = Optional.of(categorie);
         } catch (DataAccessException dae) {
-            System.out.println("Erreur chercherCategorieParId");
+            logger.error("Erreur chercherCategorieParId");
         }
         return optCategorie ;
     }
 
     @Override
     public List<Categorie> listerCategories() {
-        String sql = "SELECT id_categorie, nom"
-                   + " FROM participant";
+        String sql = "SELECT id_categorie, nom FROM categorie";
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Categorie>(Categorie.class));
     }
