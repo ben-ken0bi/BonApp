@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IngredientDAO {
-//    Optional<Ingredient> chercherIngredientParId(long idIngredient);
+    Optional<Ingredient> chercherIngredientParId(long idIngredient);
     List<Ingredient> listerTousLesIngredients();
 }

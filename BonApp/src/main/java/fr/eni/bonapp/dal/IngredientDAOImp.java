@@ -18,10 +18,22 @@ public class IngredientDAOImp implements IngredientDAO {
     this.jdbcTemplate = jdbcTemplate;
   }
 
-//  @Override
-//  public Optional<Ingredient> chercherIngredientParId(long idIngredient) {
-//    return null;
-//  }
+  public Ingredient mapRow
+  @Override
+  public Optional<Ingredient> chercherIngredientParId(long idIngredient) {
+    String sql="SELECT id_ingredient, i.nom, sc.nom, c.nom FROM ingredient i " +
+            "left join sous_categorie sc on i.id_sous_categorie=sc.id_sous_categorie " +
+            "left join categorie c on sc.id_categorie=c.id_categorie " +
+            "where id_ingredient = ?";
+  Ingredient ingredient = null;
+
+    try {
+      ingredient = jdbcTemplate.queryForObject(sql, new FilmRowMapper(), idIngredient);
+    } catch (DataAccessException dae) {
+      return Optional.empty();
+    }
+    return Optional.of(film);
+  }
 
   @Override
   public List<Ingredient> listerTousLesIngredients() {

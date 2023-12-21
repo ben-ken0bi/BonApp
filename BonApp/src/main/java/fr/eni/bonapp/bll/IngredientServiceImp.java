@@ -16,9 +16,9 @@ public class IngredientServiceImp implements IngredientService{
     }
 
     @Override
-//    public Optional<Ingredient> chercherIngredientParId(long idIngredient) {
-//        return Optional.empty();
-//    }
+    public Optional<Ingredient> chercherIngredientParId(long idIngredient) {
+        return Optional.empty();
+    }
 
     @Override
     public List<Ingredient> listerTousLesIngredients() {
