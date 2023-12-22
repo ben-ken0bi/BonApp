@@ -7,5 +7,8 @@ import java.util.Optional;
 
 public interface SousCategorieDAO {
     Optional<SousCategorie> chercherSousCategorie(long idSousCategorie);
+
     List<SousCategorie> listerSousCategories();
+
+    Optional<SousCategorie> chercherCategorie(long idSousCategorie);
 }
