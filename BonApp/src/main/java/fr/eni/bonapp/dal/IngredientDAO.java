@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface IngredientDAO {
     Optional<Ingredient> chercherIngredientParId(long idIngredient);
-    List<Ingredient> listerTousLesIngredients();
+
+    List<Ingredient> listerIngredients();
 }

@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class IngredientServiceImp implements IngredientService{
+public class IngredientServiceImp implements IngredientService {
     public final IngredientDAO ingredientDAO;
 
-    IngredientServiceImp(IngredientDAO ingredientDAO){
-        this.ingredientDAO=ingredientDAO;
+    IngredientServiceImp(IngredientDAO ingredientDAO) {
+        this.ingredientDAO = ingredientDAO;
     }
 
     @Override
@@ -21,7 +21,7 @@ public class IngredientServiceImp implements IngredientService{
     }
 
     @Override
-    public List<Ingredient> listerTousLesIngredients() {
-        return ingredientDAO.listerTousLesIngredients();
+    public List<Ingredient> listerIngredients() {
+        return ingredientDAO.listerIngredients();
     }
 }
