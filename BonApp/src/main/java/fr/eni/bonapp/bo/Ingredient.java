@@ -14,13 +14,7 @@ public class Ingredient {
     @NotNull
     private Mesure mesure;
 
-
     public Ingredient() {
-    }
-
-    public Ingredient(long idIngredient, String nom) {
-        this.idIngredient = idIngredient;
-        this.nom=nom;
     }
 
     public Ingredient(long idIngredient, String nom, SousCategorie sousCategorie, double quantite, Mesure mesure) {
