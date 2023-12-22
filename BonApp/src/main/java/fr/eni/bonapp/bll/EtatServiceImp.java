@@ -8,15 +8,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EtatServiceImp implements EtatService{
+public class EtatServiceImp implements EtatService {
     private EtatDAO etatDAO;
 
-    EtatServiceImp(EtatDAO etatDAO){
-        this.etatDAO=etatDAO;
+    EtatServiceImp(EtatDAO etatDAO) {
+        this.etatDAO = etatDAO;
     }
+
     @Override
     public Optional<Etat> chercherEtatParId(long idEtat) {
-        return Optional.empty();
+        return etatDAO.chercherEtatParId(idEtat);
     }
 
     @Override
