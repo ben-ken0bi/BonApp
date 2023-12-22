@@ -16,7 +16,7 @@ import java.util.Optional;
 public class CategorieDAOImpl implements CategorieDAO{
     private JdbcTemplate jdbcTemplate;
     Logger logger = LoggerFactory.getLogger(CategorieDAOImpl.class);
-    public CategorieDAOImpl(JdbcTemplate jdbcTemplate) {
+    CategorieDAOImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
