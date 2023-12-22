@@ -5,14 +5,14 @@ import jakarta.validation.constraints.NotNull;
 public class Etat {
     private long idEtat;
     @NotNull
-    private String etat;
+    private String libelle;
 
     public Etat() {
     }
 
-    public Etat(long idEtat, String etat) {
+    public Etat(long idEtat, String libelle) {
         this.idEtat = idEtat;
-        this.etat = etat;
+        this.libelle = libelle;
     }
 
     public long getIdEtat() {
@@ -23,19 +23,19 @@ public class Etat {
         this.idEtat = idEtat;
     }
 
-    public String getEtat() {
-        return etat;
+    public String getLibelle() {
+        return libelle;
     }
 
-    public void setEtat(String etat) {
-        this.etat = etat;
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
     }
 
     @Override
     public String toString() {
         return "Etat{" +
                 "idEtat=" + idEtat +
-                ", etat='" + etat + '\'' +
+                ", libelle='" + libelle + '\'' +
                 '}';
     }
 }
