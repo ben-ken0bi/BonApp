@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajout Ingrédient</title>
+</head>
+<body>
+<h1>Ajouter un ingrédient</h1>
+
+<form th:object="${ingredient}" method="post" th:action="@{'/ajoutIngredient'}">
+    <div>
+        <label>Nom de l'ingrédient</label>
+        <input type="text" th:field="*{nom}">
+    </div>
+    <div>
+        <label>Sous catégorie</label>
+        <select th:field="*{sousCategorie}" required>
+            <option th:each="sousCategorie: ${@SousCategorieService.listerSousCategories}"
+                    th:value="${sousCategorie.getIdSousCategorie()}" th:text="${sousCategorie.nom}"></option>
+        </select>
+    </div>
+    <button type="submit">enregistrer</button>
+
+</form>
+</body>
+</html>

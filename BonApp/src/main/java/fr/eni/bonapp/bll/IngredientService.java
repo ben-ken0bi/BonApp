@@ -10,4 +10,6 @@ public interface IngredientService {
     Optional<Ingredient> chercherIngredientParId(long idIngredient);
 
     List<Ingredient> listerIngredients();
+
+    public void ajouterIngredient(Ingredient ingredient);
 }

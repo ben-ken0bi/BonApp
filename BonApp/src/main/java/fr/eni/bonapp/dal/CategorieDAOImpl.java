@@ -27,7 +27,7 @@ public class CategorieDAOImpl implements CategorieDAO{
 
         try {
             Categorie categorie = jdbcTemplate.queryForObject(sql,
-                    (ResultSet rs, int rowNum) -> new Categorie(rs.getLong(1), rs.getString(2)));
+                    (ResultSet rs, int rowNum) -> new Categorie(rs.getLong(1), rs.getString(2)),idCategorie);
             optCategorie = Optional.of(categorie);
         } catch (DataAccessException dae) {
             logger.error("Erreur chercherCategorieParId");

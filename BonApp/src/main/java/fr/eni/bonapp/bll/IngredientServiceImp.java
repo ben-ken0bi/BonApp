@@ -2,10 +2,11 @@ package fr.eni.bonapp.bll;
 
 import fr.eni.bonapp.bo.Ingredient;
 import fr.eni.bonapp.dal.IngredientDAO;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class IngredientServiceImp implements IngredientService {
@@ -23,5 +24,10 @@ public class IngredientServiceImp implements IngredientService {
     @Override
     public List<Ingredient> listerIngredients() {
         return ingredientDAO.listerIngredients();
+    }
+
+    @Override
+    public void ajouterIngredient(Ingredient ingredient) {
+        ingredientDAO.ajouterIngredient(ingredient);
     }
 }
