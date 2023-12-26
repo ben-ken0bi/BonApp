@@ -1,16 +1,15 @@
 package fr.eni.bonapp.dal;
 
 import fr.eni.bonapp.bo.Categorie;
+import java.sql.ResultSet;
+import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import java.sql.ResultSet;
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class CategorieDAOImpl implements CategorieDAO{
@@ -41,6 +40,13 @@ public class CategorieDAOImpl implements CategorieDAO{
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Categorie>(Categorie.class));
     }
+    return optCategorie;
+  }
 
+  @Override
+  public List<Categorie> listerCategories() {
+    String sql = "SELECT id_categorie, nom FROM categorie";
 
+    return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Categorie>(Categorie.class));
+  }
 }
