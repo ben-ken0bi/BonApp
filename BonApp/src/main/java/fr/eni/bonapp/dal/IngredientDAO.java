@@ -9,4 +9,6 @@ public interface IngredientDAO {
     Optional<Ingredient> chercherIngredientParId(long idIngredient);
 
     List<Ingredient> listerIngredients();
+
+    void ajouterIngredient(Ingredient ingredient);
 }

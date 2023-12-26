@@ -5,14 +5,14 @@
     <title>Liste des ingrédients</title>
 </head>
 <body>
+
 <h1>Liste des ingrédients</h1>
 
 <th:block th:object="${ingredients}">
     <tr th:each="ingredient : ${ingredients}">
         <div th:text="${ingredient.nom}"></div>
     </tr>
-
-
 </th:block>
+
 </body>
 </html>

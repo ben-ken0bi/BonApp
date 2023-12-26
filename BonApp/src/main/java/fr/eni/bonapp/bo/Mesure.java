@@ -33,9 +33,6 @@ public class Mesure {
 
     @Override
     public String toString() {
-        return "Mesure{" +
-                "idMesure=" + idMesure +
-                ", mesure='" + mesure + '\'' +
-                '}';
+        return "Mesure{" + "idMesure=" + idMesure + ", mesure='" + mesure + '\'' + '}';
     }
 }

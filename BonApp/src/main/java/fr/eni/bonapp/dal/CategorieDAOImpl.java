@@ -12,26 +12,33 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CategorieDAOImpl implements CategorieDAO {
-  private JdbcTemplate jdbcTemplate;
-  Logger logger = LoggerFactory.getLogger(CategorieDAOImpl.class);
+public class CategorieDAOImpl implements CategorieDAO{
+    private JdbcTemplate jdbcTemplate;
+    Logger logger = LoggerFactory.getLogger(CategorieDAOImpl.class);
+    CategorieDAOImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
-  CategorieDAOImpl(JdbcTemplate jdbcTemplate) {
-    this.jdbcTemplate = jdbcTemplate;
-  }
+    @Override
+    public Optional<Categorie> chercherCategorieParId(long idCategorie) {
+        String sql = "SELECT id_categorie, nom FROM categorie WHERE id_categorie=?";
+        Optional<Categorie> optCategorie = Optional.empty();
 
-  @Override
-  public Optional<Categorie> chercherCategorieParId(long idCategorie) {
-    String sql = "SELECT id_categorie, nom FROM categorie WHERE id_categorie=?";
-    Optional<Categorie> optCategorie = Optional.empty();
+        try {
+            Categorie categorie = jdbcTemplate.queryForObject(sql,
+                    (ResultSet rs, int rowNum) -> new Categorie(rs.getLong(1), rs.getString(2)),idCategorie);
+            optCategorie = Optional.of(categorie);
+        } catch (DataAccessException dae) {
+            logger.error("Erreur chercherCategorieParId");
+        }
+        return optCategorie ;
+    }
 
-    try {
-      Categorie categorie =
-          jdbcTemplate.queryForObject(
-              sql, (ResultSet rs, int rowNum) -> new Categorie(rs.getLong(1), rs.getString(2)));
-      optCategorie = Optional.of(categorie);
-    } catch (DataAccessException dae) {
-      logger.error("Erreur chercherCategorieParId");
+    @Override
+    public List<Categorie> listerCategories() {
+        String sql = "SELECT id_categorie, nom FROM categorie";
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Categorie>(Categorie.class));
     }
     return optCategorie;
   }
