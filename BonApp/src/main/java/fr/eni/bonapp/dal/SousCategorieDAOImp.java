@@ -22,6 +22,12 @@ public class SousCategorieDAOImp implements SousCategorieDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /**
+     * Permet de chercher une sous-catégorie via son id. Si aucune sous-catégorie n'est trouvée, renvoie un
+     * logger le precisant et un optional vide.
+     * @param idSousCategorie
+     * @return
+     */
     @Override
     public Optional<SousCategorie> chercherSousCategorie(long idSousCategorie) {
         String sql = "Select id_sous_categorie, nom from sous_categorie where id_sous_categorie = ? ";
@@ -32,13 +38,19 @@ public class SousCategorieDAOImp implements SousCategorieDAO {
                             sql,
                             (ResultSet rs, int rowNum) -> new SousCategorie(rs.getLong(1), rs.getString(2)),
                             idSousCategorie);
-            optSousCategorie = optSousCategorie.of(sousCategorie);
+            optSousCategorie = Optional.of(sousCategorie);
+
         } catch (DataAccessException dae) {
             logger.error("Erreur chercherCategorieParId");
+            return Optional.empty();
         }
         return optSousCategorie;
     }
 
+    /**
+     * Permet d'afficher la liste de toutes les sous-catégories par ordre alphabétique.
+     * @return
+     */
     @Override
     public List<SousCategorie> listerSousCategories() {
         String sql = "SELECT id_sous_categorie,nom,id_categorie FROM sous_categorie order by nom ASC";

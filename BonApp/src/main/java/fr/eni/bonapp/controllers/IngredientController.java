@@ -22,7 +22,9 @@ public class IngredientController {
     }
 
     /**
-     * lISTES D'INGREDIENTS*
+     * Permet d'afficher la page avec la liste de tous les ingrédients.
+     * @param model
+     * @return
      */
     @GetMapping("/ingredients")
     public String ingredients(Model model) {
@@ -32,7 +34,9 @@ public class IngredientController {
     }
 
     /**
-     * FORMULAIRE AJOUT D'INGREDIENTS*
+     * Permet d'afficher la page avec le formulaire de création d'ingrédients.
+     * @param model
+     * @return
      */
     @GetMapping("/ajoutIngredient")
     public String afficherAjoutIngredient(Model model) {
@@ -41,10 +45,17 @@ public class IngredientController {
         return "/ajoutIngredient";
     }
 
+    /**
+     * Permet de valider et d'envoyer le formulaire en base de données.
+     * S'il y a des erreurs lors de l'envoie du formulaire, redirige vers la page d'erreur
+     * @param ingredient
+     * @param bindingResult
+     * @return
+     */
     @PostMapping("/ajoutIngredient")
     public String ajoutIngredient(@Valid Ingredient ingredient, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "accueil";
+            return "erreur";
         }
         ingredientService.ajouterIngredient(ingredient);
 

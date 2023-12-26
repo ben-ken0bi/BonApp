@@ -29,14 +29,6 @@ public class Ingredient {
         this.sousCategorie = sousCategorie;
     }
 
-    public Ingredient(
-            long idIngredient, String nom, SousCategorie sousCategorie, double quantite, Mesure mesure) {
-        this.idIngredient = idIngredient;
-        this.nom = nom;
-        this.sousCategorie = sousCategorie;
-        this.quantite = quantite;
-        this.mesure = mesure;
-    }
 
     public long getIdIngredient() {
         return idIngredient;

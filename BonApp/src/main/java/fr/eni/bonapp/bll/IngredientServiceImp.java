@@ -18,7 +18,7 @@ public class IngredientServiceImp implements IngredientService {
 
     @Override
     public Optional<Ingredient> chercherIngredientParId(long idIngredient) {
-        return Optional.empty();
+        return ingredientDAO.chercherIngredientParId(idIngredient);
     }
 
     @Override
