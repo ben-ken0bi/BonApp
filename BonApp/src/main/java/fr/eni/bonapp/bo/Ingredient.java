@@ -9,27 +9,26 @@ public class Ingredient {
     private String nom;
     @NotNull
     private SousCategorie sousCategorie;
+
     @Min(0)
     private double quantite;
-    @NotNull
-    private Mesure mesure;
 
+    private Mesure mesure;
 
     public Ingredient() {
     }
 
     public Ingredient(long idIngredient, String nom) {
         this.idIngredient = idIngredient;
-        this.nom=nom;
+        this.nom = nom;
     }
 
-    public Ingredient(long idIngredient, String nom, SousCategorie sousCategorie, double quantite, Mesure mesure) {
+    public Ingredient(long idIngredient, String nom, SousCategorie sousCategorie) {
         this.idIngredient = idIngredient;
         this.nom = nom;
         this.sousCategorie = sousCategorie;
-        this.quantite = quantite;
-        this.mesure = mesure;
     }
+
 
     public long getIdIngredient() {
         return idIngredient;
@@ -73,12 +72,18 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return "Ingredient{" +
-                "idIngredient=" + idIngredient +
-                ", nom='" + nom + '\'' +
-                ", sousCategorie=" + sousCategorie +
-                ", quantite=" + quantite +
-                ", mesure=" + mesure +
-                '}';
+        return "Ingredient{"
+                + "idIngredient="
+                + idIngredient
+                + ", nom='"
+                + nom
+                + '\''
+                + ", sousCategorie="
+                + sousCategorie
+                + ", quantite="
+                + quantite
+                + ", mesure="
+                + mesure
+                + '}';
     }
 }

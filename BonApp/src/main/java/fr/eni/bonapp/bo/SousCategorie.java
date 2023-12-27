@@ -18,6 +18,11 @@ public class SousCategorie {
         this.categorie = categorie;
     }
 
+    public SousCategorie(long idSousCategorie, String nom) {
+        this.idSousCategorie = idSousCategorie;
+        this.nom = nom;
+    }
+
     public long getIdSousCategorie() {
         return idSousCategorie;
     }
@@ -44,10 +49,14 @@ public class SousCategorie {
 
     @Override
     public String toString() {
-        return "SousCategorie{" +
-                "idSousCategorie=" + idSousCategorie +
-                ", nom='" + nom + '\'' +
-                ", categorie=" + categorie +
-                '}';
+        return "SousCategorie{"
+                + "idSousCategorie="
+                + idSousCategorie
+                + ", nom='"
+                + nom
+                + '\''
+                + ", categorie="
+                + categorie
+                + '}';
     }
 }
