@@ -38,15 +38,7 @@ public class CategorieDAOImpl implements CategorieDAO{
     public List<Categorie> listerCategories() {
         String sql = "SELECT id_categorie, nom FROM categorie";
 
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Categorie>(Categorie.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Categorie.class));
     }
-    return optCategorie;
   }
 
-  @Override
-  public List<Categorie> listerCategories() {
-    String sql = "SELECT id_categorie, nom FROM categorie";
-
-    return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Categorie>(Categorie.class));
-  }
-}
