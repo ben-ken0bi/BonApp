@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CategorieDAOImpl implements CategorieDAO{
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
     Logger logger = LoggerFactory.getLogger(CategorieDAOImpl.class);
     CategorieDAOImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
