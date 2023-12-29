@@ -22,6 +22,6 @@ public class MesureServiceImp implements MesureService {
 
     @Override
     public Optional<Mesure> chercherMesureParId(long idMesure) {
-        return Optional.empty();
+        return mesureDAO.chercherMesureParId(idMesure);
     }
 }
