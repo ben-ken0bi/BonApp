@@ -14,11 +14,11 @@ public class Preparation {
     public Preparation() {
     }
 
-    public Preparation(long idPreparation, int numero, String texte,Recette recette) {
+    public Preparation(long idPreparation, int numero, String texte, Recette recette) {
         this.idPreparation = idPreparation;
         this.numero = numero;
         this.texte = texte;
-        this.recette=recette;
+        this.recette = recette;
     }
 
     public long getIdPreparation() {
@@ -55,10 +55,14 @@ public class Preparation {
 
     @Override
     public String toString() {
-        return "Preparation{" +
-                "idPreparation=" + idPreparation +
-                ", numero=" + numero +
-                ", texte='" + texte + '\'' +
-                '}';
+        return "Preparation{"
+                + "idPreparation="
+                + idPreparation
+                + ", numero="
+                + numero
+                + ", texte='"
+                + texte
+                + '\''
+                + '}';
     }
 }

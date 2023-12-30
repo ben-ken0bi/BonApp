@@ -1,22 +1,20 @@
 package fr.eni.bonapp.dal;
 
-import fr.eni.bonapp.bo.Ingredient;
 import fr.eni.bonapp.bo.Preparation;
+import fr.eni.bonapp.bo.Recette;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-
-import fr.eni.bonapp.bo.Recette;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class PreparationDAOImpl implements PreparationDAO {
@@ -31,10 +29,9 @@ public class PreparationDAOImpl implements PreparationDAO {
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-
     }
 
-    class PreparationRowMapper implements RowMapper<Preparation>{
+    class PreparationRowMapper implements RowMapper<Preparation> {
 
         @Override
         public Preparation mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -48,7 +45,9 @@ public class PreparationDAOImpl implements PreparationDAO {
             return preparation;
         }
     }
+
     /**
+     * Permet de lister les préparations d'une recette.
      *
      * @param idRecette
      * @return
@@ -64,14 +63,17 @@ public class PreparationDAOImpl implements PreparationDAO {
     }
 
     /**
+     * Permet de récuperer une préparation par son id
      *
      * @param idPreparation
      * @return
      */
     @Override
     public Optional<Preparation> chercherPreparationParId(long idPreparation) {
-        String sql ="Select id_preparation, numero, texte, id_recette from preparation where id_preparation =?";
-        Preparation preparation = jdbcTemplate.queryForObject(sql,new PreparationRowMapper(), idPreparation);
+        String sql =
+                "Select id_preparation, numero, texte, id_recette from preparation where id_preparation =?";
+        Preparation preparation =
+                jdbcTemplate.queryForObject(sql, new PreparationRowMapper(), idPreparation);
 
         return Optional.of(preparation);
     }

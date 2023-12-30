@@ -107,4 +107,18 @@ public class IngredientDAOImp implements IngredientDAO {
 
         namedParameterJdbcTemplate.update(sql, paramSrc, generatedKey);
     }
+
+    /**
+     * Permet de récupere la liste des ingrédients contenus dans une recette.
+     *
+     * @param idRecette
+     * @return
+     */
+    @Override
+    public List<Ingredient> listerIngredientPourRecette(long idRecette) {
+        String sql =
+                "Select id_recette_ingredient, quantite, id_recette,id_ingredient,id_mesure from recette_ingredient where id_recette=?";
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Ingredient.class), idRecette);
+    }
 }

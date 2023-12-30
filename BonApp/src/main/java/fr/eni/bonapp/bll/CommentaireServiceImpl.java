@@ -9,19 +9,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CommentaireServiceImpl implements CommentaireService {
-  private CommentaireDAO commentaireDAO;
+    private CommentaireDAO commentaireDAO;
 
-  CommentaireServiceImpl(CommentaireDAO commentaireDAO){
-    this.commentaireDAO=commentaireDAO;
-  }
+    CommentaireServiceImpl(@Lazy CommentaireDAO commentaireDAO) {
+        this.commentaireDAO = commentaireDAO;
+    }
 
-  @Override
-  public List<Commentaire> listerCommentaireParIdRecette(long idRecette) {
-    return commentaireDAO.listerCommentairesParRecetteId(idRecette);
-  }
+    @Override
+    public List<Commentaire> listerCommentaireParIdRecette(long idRecette) {
+        return commentaireDAO.listerCommentairesParRecetteId(idRecette);
+    }
 
-  @Override
-  public Optional<Commentaire> chercherCommentaireParId(long idCommentaire) {
-    return commentaireDAO.chercherCommentaireParId(idCommentaire);
-  }
+    @Override
+    public Optional<Commentaire> chercherCommentaireParId(long idCommentaire) {
+        return commentaireDAO.chercherCommentaireParId(idCommentaire);
+    }
 }

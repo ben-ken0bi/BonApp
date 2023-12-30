@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface UtilisateurDAO {
     Optional<Utilisateur> chercherUtilisateurParId(long idUtilisateur);
+
     List<Utilisateur> listerUtilisateurs();
+
     Optional<Utilisateur> chercherUtilisateurParRecette(long idRecette);
 }

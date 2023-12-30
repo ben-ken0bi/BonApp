@@ -23,8 +23,9 @@ public class SousCategorieDAOImp implements SousCategorieDAO {
     }
 
     /**
-     * Permet de chercher une sous-catégorie via son id. Si aucune sous-catégorie n'est trouvée, renvoie un
-     * logger le precisant et un optional vide.
+     * Permet de chercher une sous-catégorie via son id. Si aucune sous-catégorie n'est trouvée,
+     * renvoie un logger le precisant et un optional vide.
+     *
      * @param idSousCategorie
      * @return
      */
@@ -49,6 +50,7 @@ public class SousCategorieDAOImp implements SousCategorieDAO {
 
     /**
      * Permet d'afficher la liste de toutes les sous-catégories par ordre alphabétique.
+     *
      * @return
      */
     @Override
