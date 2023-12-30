@@ -2,7 +2,6 @@ package fr.eni.bonapp.bo;
 
 import jakarta.validation.constraints.NotNull;
 
-import java.awt.*;
 import java.util.List;
 
 public class Recette {
@@ -10,7 +9,7 @@ public class Recette {
     private long idRecette;
     @NotNull
     private String titre;
-    private Image image;
+    private String image;
     @NotNull
     private List<Ingredient> listeIngredients;
     @NotNull
@@ -26,7 +25,16 @@ public class Recette {
     public Recette() {
     }
 
-    public Recette(long idRecette, String titre, Image image, List<Ingredient> listeIngredients, List<Preparation> listePreparation, Etat etat, List<Commentaire> listeCommentaires, Utilisateur utilisateur, Met met) {
+    public Recette(
+            long idRecette,
+            String titre,
+            String image,
+            List<Ingredient> listeIngredients,
+            List<Preparation> listePreparation,
+            Etat etat,
+            List<Commentaire> listeCommentaires,
+            Utilisateur utilisateur,
+            Met met) {
         this.idRecette = idRecette;
         this.titre = titre;
         this.image = image;
@@ -54,11 +62,11 @@ public class Recette {
         this.titre = titre;
     }
 
-    public Image getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -112,16 +120,26 @@ public class Recette {
 
     @Override
     public String toString() {
-        return "Recette{" +
-                "idRecette=" + idRecette +
-                ", titre='" + titre + '\'' +
-                ", image=" + image +
-                ", listeIngredients=" + listeIngredients +
-                ", listePreparation=" + listePreparation +
-                ", etat=" + etat +
-                ", listeCommentaires=" + listeCommentaires +
-                ", utilisateur=" + utilisateur +
-                ", met=" + met +
-                '}';
+        return "Recette{"
+                + "idRecette="
+                + idRecette
+                + ", titre='"
+                + titre
+                + '\''
+                + ", image="
+                + image
+                + ", listeIngredients="
+                + listeIngredients
+                + ", listePreparation="
+                + listePreparation
+                + ", etat="
+                + etat
+                + ", listeCommentaires="
+                + listeCommentaires
+                + ", utilisateur="
+                + utilisateur
+                + ", met="
+                + met
+                + '}';
     }
 }
