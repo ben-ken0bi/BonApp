@@ -4,6 +4,9 @@ import fr.eni.bonapp.bo.Met;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -13,7 +16,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MetDAOImpl implements MetDAO {
   private JdbcTemplate jdbcTemplate;
-
+  Logger logger = LoggerFactory.getLogger(MetDAOImpl.class);
   @Autowired
   public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
@@ -21,6 +24,7 @@ public class MetDAOImpl implements MetDAO {
 
   @Override
   public Optional<Met> chercherMetParId(long idMet) {
+    logger.info("Dans la recherche de met pour l'id suivant {}",idMet);
     String sql = "SELECT id_met, met FROM met WHERE id_met=?";
     Optional<Met> optMet = Optional.empty();
     try {

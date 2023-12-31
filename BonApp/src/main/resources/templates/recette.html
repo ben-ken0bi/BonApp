@@ -7,11 +7,38 @@
 <body>
 <th:block th:object="${recette}">
     <h1>[[*{titre}]]</h1>
-<!--    <p th:text="${recette.etat.getLibelle}">-->
+    <p>Recette numéro : [[*{idRecette}]]</p>
+    <p>Image : [[*{image}]]</p>
     <div>
-
+        <label>Utilisateur :</label>
+        <p th:text="${recette.utilisateur.nom}"></p>
     </div>
-
+    <br>
+    <div>
+        <label>Met :</label>
+        <p th:text="${recette.met.typeMet}"></p>
+    </div>
+    <br>
+    <div>
+        <label>Commentaire :</label>
+        <p th:text="${recette.listeCommentaires}"></p>
+    </div>
+    <br>
+    <div>
+        <label>Ingrédients :</label>
+        <p th:text="${recette.listeIngredients}"></p>
+    </div>
+    <br>
+    <div>
+        <label>Etat :</label>
+        <p th:text="${recette.etat}"></p>
+    </div>
+    <br>
+    <div>
+        <label>Préparations :</label>
+        <p th:text="${recette.listePreparation}"></p>
+    </div>
+    <br>
 </th:block>
 
 

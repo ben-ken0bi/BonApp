@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class StringToMetConverter implements Converter<String, Met> {
 
-    private MetService metService;
+    private final MetService metService;
 
     public StringToMetConverter(MetService metServicee) {
         this.metService = metServicee;
@@ -17,7 +17,7 @@ public class StringToMetConverter implements Converter<String, Met> {
     @Override
     public Met convert(String idMet) {
 
-        Long idMetLong = Long.parseLong(idMet);
+        long idMetLong = Long.parseLong(idMet);
 
         return metService.chercherMetParId(idMetLong).get();
     }

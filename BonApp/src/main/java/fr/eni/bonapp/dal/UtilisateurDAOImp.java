@@ -23,6 +23,7 @@ public class UtilisateurDAOImp implements UtilisateurDAO {
 
   @Override
   public Optional<Utilisateur> chercherUtilisateurParId(long idUtilisateur) {
+    logger.info("Dans Utilisateur avec la methode pour trouver son id numéro {}", idUtilisateur);
     String sql =
         "Select id_utilisateur, pseudo, mdp, nom, prenom, email from utilisateur where id_utilisateur =?";
     Optional<Utilisateur> optUtilisateur = Optional.empty();

@@ -86,6 +86,7 @@ public class IngredientDAOImp implements IngredientDAO {
      */
     @Override
     public List<Ingredient> listerIngredients() {
+        logger.info("Dans la methode pour lister les ingrédients");
         String sql = "SELECT id_ingredient, nom, id_sous_categorie  FROM ingredient ORDER BY nom ASC";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Ingredient.class));
     }
@@ -118,7 +119,8 @@ public class IngredientDAOImp implements IngredientDAO {
     public List<Ingredient> listerIngredientPourRecette(long idRecette) {
         String sql =
                 "Select id_recette_ingredient, quantite, id_recette,id_ingredient,id_mesure from recette_ingredient where id_recette=?";
-
+        // todo : changer la requete pour recupere les données manquantes : [Ingredient{idIngredient=40,
+        // nom='null', sousCategorie=null, quantite=250.0, mesure=null}
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Ingredient.class), idRecette);
     }
 }

@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
 public class PreparationDAOImpl implements PreparationDAO {
     Logger logger = LoggerFactory.getLogger(PreparationDAOImpl.class);
     private JdbcTemplate jdbcTemplate;
-    private RecetteDAO recetteDAO;
+    private final RecetteDAO recetteDAO;
 
     PreparationDAOImpl(RecetteDAO recetteDAO) {
         this.recetteDAO = recetteDAO;
@@ -54,6 +54,7 @@ public class PreparationDAOImpl implements PreparationDAO {
      */
     @Override
     public List<Preparation> listerPreparationsParIdRecette(long idRecette) {
+        logger.info("Dans la methode pour lister les préparations pour la recette à l'id {}",idRecette);
         String sql =
                 "SELECT id_preparation, numero, texte, id_recette"
                         + " FROM preparation"
