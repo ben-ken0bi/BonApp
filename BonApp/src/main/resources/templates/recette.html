@@ -26,7 +26,11 @@
     <br>
     <div>
         <label>Ingrédients :</label>
-        <p th:text="${recette.listeIngredients}"></p>
+        <th:block>
+            <div th:each="ingredient : ${recette.listeIngredients}">
+                [[${ingredient.nom}]] [[${ingredient.quantite}]] [[${ingredient.mesure.mesure}]]
+            </div>
+        </th:block>
     </div>
     <br>
     <div>

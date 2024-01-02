@@ -1,13 +1,8 @@
 package fr.eni.bonapp.dal;
 
 import fr.eni.bonapp.bo.Ingredient;
+import fr.eni.bonapp.bo.Mesure;
 import fr.eni.bonapp.bo.SousCategorie;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +16,20 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public class IngredientDAOImp implements IngredientDAO {
     Logger logger = LoggerFactory.getLogger(IngredientDAOImp.class);
     private SousCategorieDAO sousCategorieDAO;
+    private final MesureDAO mesureDAO;
 
-    IngredientDAOImp(SousCategorieDAO sousCategorieDAO) {
+    IngredientDAOImp(SousCategorieDAO sousCategorieDAO, MesureDAO mesureDAO) {
         this.sousCategorieDAO = sousCategorieDAO;
+        this.mesureDAO = mesureDAO;
     }
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -50,9 +52,12 @@ public class IngredientDAOImp implements IngredientDAO {
 
             Optional<SousCategorie> optSousCategorie =
                     sousCategorieDAO.chercherSousCategorie(rs.getLong("id_sous_categorie"));
-
             optSousCategorie.ifPresent(ingredient::setSousCategorie);
 
+            Optional<Mesure> optMesure = mesureDAO.chercherMesureParId(rs.getLong("id_mesure"));
+            optMesure.ifPresent(ingredient::setMesure);
+
+            ingredient.setQuantite(rs.getLong("quantite"));
             return ingredient;
         }
     }
@@ -110,7 +115,7 @@ public class IngredientDAOImp implements IngredientDAO {
     }
 
     /**
-     * Permet de récupere la liste des ingrédients contenus dans une recette.
+     * Permet de récuperer la liste des ingrédients contenus dans une recette.
      *
      * @param idRecette
      * @return
@@ -118,9 +123,13 @@ public class IngredientDAOImp implements IngredientDAO {
     @Override
     public List<Ingredient> listerIngredientPourRecette(long idRecette) {
         String sql =
-                "Select id_recette_ingredient, quantite, id_recette,id_ingredient,id_mesure from recette_ingredient where id_recette=?";
-        // todo : changer la requete pour recupere les données manquantes : [Ingredient{idIngredient=40,
-        // nom='null', sousCategorie=null, quantite=250.0, mesure=null}
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Ingredient.class), idRecette);
+                "Select re.id_recette_ingredient, re.quantite, re.id_recette,titre,re.id_ingredient,i.nom,re.id_mesure, m.mesure, s.id_sous_categorie, s.nom "
+                        + "from recette_ingredient re "
+                        + "join ingredient i on i.id_ingredient=re.id_ingredient "
+                        + "join sous_categorie s on s.id_sous_categorie=i.id_sous_categorie "
+                        + "join mesure m on m.id_mesure=re.id_mesure "
+                        + "join recette r on r.id_recette=re.id_recette "
+                        + "where re.id_recette=?";
+        return jdbcTemplate.query(sql, new IngredientRowMapper(), idRecette);
     }
 }

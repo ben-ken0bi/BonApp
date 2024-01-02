@@ -10,8 +10,8 @@ public class StringToMetConverter implements Converter<String, Met> {
 
     private final MetService metService;
 
-    public StringToMetConverter(MetService metServicee) {
-        this.metService = metServicee;
+    public StringToMetConverter(MetService metService) {
+        this.metService = metService;
     }
 
     @Override
