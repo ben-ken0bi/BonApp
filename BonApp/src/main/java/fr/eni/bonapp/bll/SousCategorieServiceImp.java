@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service("SousCategorieService")
 public class SousCategorieServiceImp implements SousCategorieService {
-    public final SousCategorieDAO sousCategorieDAO;
+    private final SousCategorieDAO sousCategorieDAO;
 
     SousCategorieServiceImp(SousCategorieDAO sousCategorieDAO) {
         this.sousCategorieDAO = sousCategorieDAO;

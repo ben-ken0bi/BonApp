@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CategorieServiceImpl implements CategorieService {
-    private CategorieDAO categorieDAO;
+    private final CategorieDAO categorieDAO;
 
+    CategorieServiceImpl(CategorieDAO categorieDAO){
+        this.categorieDAO=categorieDAO;
+    }
     @Override
     public Optional<Categorie> chercherCategorieParId(long idCategorie) {
         return categorieDAO.chercherCategorieParId(idCategorie);

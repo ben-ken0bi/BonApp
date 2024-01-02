@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MesureServiceImp implements MesureService {
-    public final MesureDAO mesureDAO;
+    private final MesureDAO mesureDAO;
 
     public MesureServiceImp(MesureDAO mesureDAO) {
         this.mesureDAO = mesureDAO;
