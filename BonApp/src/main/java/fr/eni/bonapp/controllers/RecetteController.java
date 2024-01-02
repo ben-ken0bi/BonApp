@@ -2,6 +2,7 @@ package fr.eni.bonapp.controllers;
 
 import fr.eni.bonapp.bll.RecetteService;
 import fr.eni.bonapp.bo.Recette;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,5 +34,53 @@ public class RecetteController {
 
     model.addAttribute("recette", recette);
     return "recette";
+  }
+
+  @GetMapping("/recettes/{idUtilisateur}")
+  public String afficherRecettesParUtilisateur(
+      @PathVariable("id") long idUtilisateur, Model model) {
+    logger.info("Affichage des recettes pour l'utilisateur avec l'id {}", idUtilisateur);
+
+    // Assuming recetteService has a method to retrieve recipes by user ID
+    List<Recette> recettes = recetteService.listerRecettesParUtilisateur(idUtilisateur);
+
+    // Add the list of recipes to the model
+    model.addAttribute("recettes", recettes);
+
+    return "recettes";
+  }
+
+  @GetMapping("/recettes/met/{idUtilisateur}/{idMet}")
+  public String afficherRecettesParUtilisateurEtMet(
+      @PathVariable("idUtilisateur") long idUtilisateur,
+      @PathVariable("idMet") long idMet,
+      Model model) {
+    logger.info(
+        "Affichage des recettes pour l'utilisateur avec l'id {} et le met avec l'id {}",
+        idUtilisateur,
+        idMet);
+
+    List<Recette> recettes = recetteService.listerRecettesParUtilisateurMet(idUtilisateur, idMet);
+
+    model.addAttribute("recettes", recettes);
+
+    return "recettes";
+  }
+
+  @GetMapping("/recettes/etat/{idUtilisateur}/{idEtat}")
+  public String afficherRecettesParUtilisateurEtEtat(
+      @PathVariable("idUtilisateur") long idUtilisateur,
+      @PathVariable("idEtat") long idEtat,
+      Model model) {
+    logger.info(
+        "Affichage des recettes pour l'utilisateur avec l'id {} et l'état avec l'id {}",
+        idUtilisateur,
+        idEtat);
+
+    List<Recette> recettes = recetteService.listerRecettesParUtilisateurEtat(idUtilisateur, idEtat);
+
+    model.addAttribute("recettes", recettes);
+
+    return "recettes";
   }
 }
