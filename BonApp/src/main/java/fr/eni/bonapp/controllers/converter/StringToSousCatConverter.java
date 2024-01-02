@@ -1,6 +1,6 @@
 package fr.eni.bonapp.controllers.converter;
 
-import fr.eni.bonapp.bll.SousCategorieService;
+import fr.eni.bonapp.bll.sousCategorie.SousCategorieService;
 import fr.eni.bonapp.bo.SousCategorie;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

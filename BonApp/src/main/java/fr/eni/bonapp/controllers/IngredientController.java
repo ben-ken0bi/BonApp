@@ -1,6 +1,6 @@
 package fr.eni.bonapp.controllers;
 
-import fr.eni.bonapp.bll.IngredientService;
+import fr.eni.bonapp.bll.ingredient.IngredientService;
 import fr.eni.bonapp.bo.Ingredient;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
