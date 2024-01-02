@@ -1,0 +1,16 @@
+#acteurSelectDiv {
+    display: flex;
+    flex-direction: column;
+}
+.plus-button {
+    margin-top: 5px;
+    padding-left: 2px;
+    font-size: 1rem;
+    background-color: black;
+    border-radius: 100px;
+    width: 30px;
+    height: 30px;
+    color: white;
+    outline: none;
+    border: none;
+}

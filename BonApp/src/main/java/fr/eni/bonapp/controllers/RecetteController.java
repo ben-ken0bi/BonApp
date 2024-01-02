@@ -1,6 +1,12 @@
 package fr.eni.bonapp.controllers;
 
+import fr.eni.bonapp.bll.EtatService;
+import fr.eni.bonapp.bll.IngredientService;
+import fr.eni.bonapp.bll.MetService;
 import fr.eni.bonapp.bll.RecetteService;
+import fr.eni.bonapp.bo.Etat;
+import fr.eni.bonapp.bo.Ingredient;
+import fr.eni.bonapp.bo.Met;
 import fr.eni.bonapp.bo.Recette;
 
 import java.util.List;
@@ -18,8 +24,11 @@ public class RecetteController {
     Logger logger = LoggerFactory.getLogger(RecetteController.class);
     private RecetteService recetteService;
 
-    RecetteController(RecetteService recetteService) {
+    RecetteController(RecetteService recetteService,IngredientService ingredientService,EtatService etatService,MetService metService) {
         this.recetteService = recetteService;
+        this.ingredientService=ingredientService;
+        this.etatService=etatService;
+        this.metService=metService;
     }
 
     /**
@@ -125,4 +134,20 @@ public class RecetteController {
 
         return "recettes";
     }
+    private IngredientService ingredientService;
+    private MetService metService;
+    private EtatService etatService;
+    @GetMapping("/formRecette")
+    public String formRecette(Model model, Recette recette){
+        List<Ingredient> ingredients = ingredientService.listerIngredients();
+        List<Met> mets = metService.listerMets();
+        List<Etat> etats = etatService.listerEtats();
+
+        model.addAttribute("ingredients",ingredients);
+        model.addAttribute("etats",etats);
+        model.addAttribute("mets",mets);
+        model.addAttribute("recette", recette);
+        return "formRecette";
+    }
+
 }

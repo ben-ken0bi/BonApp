@@ -5,14 +5,14 @@ import jakarta.validation.constraints.NotNull;
 public class Met {
     private long idMet;
     @NotNull
-    private String typeMet;
+    private String nom;
 
     public Met() {
     }
 
     public Met(long idMet, String typeMet) {
         this.idMet = idMet;
-        this.typeMet = typeMet;
+        this.nom = typeMet;
     }
 
     public long getIdMet() {
@@ -23,16 +23,16 @@ public class Met {
         this.idMet = idMet;
     }
 
-    public String getTypeMet() {
-        return typeMet;
+    public String getNom() {
+        return nom;
     }
 
-    public void setTypeMet(String typeMet) {
-        this.typeMet = typeMet;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     @Override
     public String toString() {
-        return "Met{" + "idMet=" + idMet + ", typeMet='" + typeMet + '\'' + '}';
+        return "Met{" + "idMet=" + idMet + ", typeMet='" + nom + '\'' + '}';
     }
 }

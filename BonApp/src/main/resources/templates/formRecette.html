@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire recette</title>
+    <link rel="stylesheet" href="/styles/ajoutRecette.css">
+</head>
+<body>
+<h1>Form</h1>
+<div>
+    <form method="post" th:action="@{'/formRecette'}" th:object="${recette}">
+        <div>
+            <label>Titre :</label>
+            <input type="text" th:text="*{titre}">
+        </div>
+        <div>
+            <label>Met :</label>
+            <select th:field="*{met}" required>
+                <option th:each="met : ${mets}" th:value="${met.getIdMet()}" th:text="${met.nom}"></option>
+            </select>
+        </div>
+        <div>
+            <label>Etat :</label>
+            <select th:field="*{etat}" required>
+                <option th:each="etat : ${etats}" th:value="${etat.getIdEtat()}" th:text="${etat.libelle}"></option>
+            </select>
+        </div>
+        <div>
+            <label>Ingrédients</label>
+            <div>
+                <label >Ingrédient(s) *</label>
+                <div id="ingredientSelectDiv">
+                    <select th:field="*{listeIngredients}"  required>
+                        <th:block th:each="ingredient : ${ingredients}">
+                            <option th:value="${ingredient.getIdIngredient()}"
+                                    th:text="${ingredient.nom}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <button type="button" id="ajouterActeur" class="plus-button"><i class="fa-solid fa-plus"></i></button>
+            </div>
+        </div>
+
+    </form>
+</div>
+<script src="/js/ajoutIngredient.js"></script>
+</body>
+</html>
