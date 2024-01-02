@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface CategorieDAO {
     Optional<Categorie> chercherCategorieParId(long idCategorie);
+
     List<Categorie> listerCategories();
 
 }

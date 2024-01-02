@@ -23,6 +23,7 @@ public class IngredientController {
 
     /**
      * Permet d'afficher la page avec la liste de tous les ingrédients.
+     *
      * @param model
      * @return
      */
@@ -35,6 +36,7 @@ public class IngredientController {
 
     /**
      * Permet d'afficher la page avec le formulaire de création d'ingrédients.
+     *
      * @param model
      * @return
      */
@@ -46,8 +48,9 @@ public class IngredientController {
     }
 
     /**
-     * Permet de valider et d'envoyer le formulaire en base de données.
-     * S'il y a des erreurs lors de l'envoie du formulaire, redirige vers la page d'erreur
+     * Permet de valider et d'envoyer le formulaire en base de données. S'il y a des erreurs lors de
+     * l'envoie du formulaire, redirige vers la page d'erreur
+     *
      * @param ingredient
      * @param bindingResult
      * @return

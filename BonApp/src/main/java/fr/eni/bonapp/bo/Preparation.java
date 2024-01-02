@@ -9,13 +9,16 @@ public class Preparation {
     @NotNull
     private String texte;
 
+    private Recette recette;
+
     public Preparation() {
     }
 
-    public Preparation(long idPreparation, int numero, String texte) {
+    public Preparation(long idPreparation, int numero, String texte, Recette recette) {
         this.idPreparation = idPreparation;
         this.numero = numero;
         this.texte = texte;
+        this.recette = recette;
     }
 
     public long getIdPreparation() {
@@ -42,12 +45,24 @@ public class Preparation {
         this.texte = texte;
     }
 
+    public Recette getRecette() {
+        return recette;
+    }
+
+    public void setRecette(Recette recette) {
+        this.recette = recette;
+    }
+
     @Override
     public String toString() {
-        return "Preparation{" +
-                "idPreparation=" + idPreparation +
-                ", numero=" + numero +
-                ", texte='" + texte + '\'' +
-                '}';
+        return "Preparation{"
+                + "idPreparation="
+                + idPreparation
+                + ", numero="
+                + numero
+                + ", texte='"
+                + texte
+                + '\''
+                + '}';
     }
 }

@@ -23,15 +23,14 @@ public class EtatDAOImpl implements EtatDAO {
 
     @Override
     public Optional<Etat> chercherEtatParId(long idEtat) {
-
+        logger.info("Dans Etat avec la méthode pour trouver son id numéro {}", idEtat);
         String sql = "Select id_etat, libelle from etat where id_etat=?";
         Optional<Etat> optEtat = Optional.empty();
 
         try {
             Etat etat =
                     jdbcTemplate.queryForObject(
-                            sql, (ResultSet rs, int rowNum) -> new Etat(rs.getLong(1), rs.getString(2)));
-            assert etat != null;
+                            sql, (ResultSet rs, int rowNum) -> new Etat(rs.getLong(1), rs.getString(2)), idEtat);
             optEtat = Optional.of(etat);
         } catch (DataAccessException dae) {
             logger.debug("il n'existe pas d'état à l'id suivant : {}", 1);

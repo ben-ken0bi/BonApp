@@ -33,9 +33,6 @@ public class Etat {
 
     @Override
     public String toString() {
-        return "Etat{" +
-                "idEtat=" + idEtat +
-                ", libelle='" + libelle + '\'' +
-                '}';
+        return "Etat{" + "idEtat=" + idEtat + ", libelle='" + libelle + '\'' + '}';
     }
 }

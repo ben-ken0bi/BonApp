@@ -6,9 +6,11 @@ import jakarta.validation.constraints.NotNull;
 
 public class Utilisateur {
     private long idUtilisateur;
+
     @NotNull
     @Max(50)
     private String nom;
+
     @NotNull
     private String prenom;
     @NotNull
@@ -22,7 +24,8 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
-    public Utilisateur(long idUtilisateur, String nom, String prenom, String pseudo, String mdp, String email) {
+    public Utilisateur(
+            long idUtilisateur, String nom, String prenom, String pseudo, String mdp, String email) {
         this.idUtilisateur = idUtilisateur;
         this.nom = nom;
         this.prenom = prenom;
@@ -81,13 +84,24 @@ public class Utilisateur {
 
     @Override
     public String toString() {
-        return "Utilisateur{" +
-                "idUtilisateur=" + idUtilisateur +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", pseudo='" + pseudo + '\'' +
-                ", mdp='" + mdp + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return "Utilisateur{"
+                + "idUtilisateur="
+                + idUtilisateur
+                + ", nom='"
+                + nom
+                + '\''
+                + ", prenom='"
+                + prenom
+                + '\''
+                + ", pseudo='"
+                + pseudo
+                + '\''
+                + ", mdp='"
+                + mdp
+                + '\''
+                + ", email='"
+                + email
+                + '\''
+                + '}';
     }
 }

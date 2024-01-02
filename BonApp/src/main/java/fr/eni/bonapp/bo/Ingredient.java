@@ -29,7 +29,6 @@ public class Ingredient {
         this.sousCategorie = sousCategorie;
     }
 
-
     public long getIdIngredient() {
         return idIngredient;
     }

@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface MetService {
     Optional<Met> chercherMetParId(long idMet);
-    List<Met> listerMets();
 
+    List<Met> listerMets();
 }
