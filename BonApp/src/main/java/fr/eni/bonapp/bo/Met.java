@@ -33,10 +33,6 @@ public class Met {
 
     @Override
     public String toString() {
-        return "Met{" +
-                "idMet=" + idMet +
-                ", typeMet='" + typeMet + '\'' +
-                '}';
+        return "Met{" + "idMet=" + idMet + ", typeMet='" + typeMet + '\'' + '}';
     }
 }
-

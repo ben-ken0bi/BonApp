@@ -11,4 +11,6 @@ public interface IngredientDAO {
     List<Ingredient> listerIngredients();
 
     void ajouterIngredient(Ingredient ingredient);
+
+    List<Ingredient> listerIngredientPourRecette(long idRecette);
 }

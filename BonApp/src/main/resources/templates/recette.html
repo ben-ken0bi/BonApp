@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Détail recette</title>
+</head>
+<body>
+<th:block th:object="${recette}">
+    <h1>[[*{titre}]]</h1>
+    <p>Recette numéro : [[*{idRecette}]]</p>
+    <p>Image : [[*{image}]]</p>
+    <div>
+        <label>Utilisateur :</label>
+        <p th:text="${recette.utilisateur.nom}"></p>
+    </div>
+    <br>
+    <div>
+        <label>Met :</label>
+        <p th:text="${recette.met.typeMet}"></p>
+    </div>
+    <br>
+    <div>
+        <label>Commentaire :</label>
+        <div th:each="commentaire : ${recette.listeCommentaires}">
+            [[${commentaire.date}]]- [[${commentaire.commentaire}]]
+        </div>
+    </div>
+    <br>
+    <div>
+        <label>Ingrédients :</label>
+        <th:block>
+            <div th:each="ingredient : ${recette.listeIngredients}">
+                [[${ingredient.nom}]] [[${ingredient.quantite}]] [[${ingredient.mesure.mesure}]]
+            </div>
+        </th:block>
+    </div>
+    <br>
+    <div>
+        <label>Etat :</label>
+        <p th:text="${recette.etat.libelle}"></p>
+    </div>
+    <br>
+    <div>
+        <label>Préparations :</label>
+        <div th:each="preparation : ${recette.listePreparation}">
+            [[${preparation.numero}]])  [[${preparation.texte}]]
+        </div>
+    </div>
+    <br>
+</th:block>
+
+
+</body>
+</html>

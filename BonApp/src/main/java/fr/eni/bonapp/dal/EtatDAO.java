@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface EtatDAO {
     Optional<Etat> chercherEtatParId(long idEtat);
+
     List<Etat> listerEtats();
 }
