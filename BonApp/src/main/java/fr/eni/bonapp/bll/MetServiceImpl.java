@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MetServiceImpl implements MetService {
-    MetDAO metDAO;
+    private final MetDAO metDAO;
 
     public MetServiceImpl(MetDAO metDAO) {
         this.metDAO = metDAO;

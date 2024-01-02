@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class StringToUtilisateurConverter implements Converter<String, Utilisateur> {
 
-    private UtilisateurService utilisateurService;
+    private final UtilisateurService utilisateurService;
 
     public StringToUtilisateurConverter(UtilisateurService utilisateurService) {
         this.utilisateurService = utilisateurService;
@@ -17,7 +17,7 @@ public class StringToUtilisateurConverter implements Converter<String, Utilisate
     @Override
     public Utilisateur convert(String idUtilisateur) {
 
-        Long idUtilisateurLong = Long.parseLong(idUtilisateur);
+        long idUtilisateurLong = Long.parseLong(idUtilisateur);
 
         return utilisateurService.chercherUtilisateurParId(idUtilisateurLong).get();
     }

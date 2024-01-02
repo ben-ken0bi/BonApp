@@ -11,6 +11,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -31,6 +32,9 @@ public class PreparationDAOImpl implements PreparationDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /**
+     * Dans le RowMapper de préparation
+     */
     class PreparationRowMapper implements RowMapper<Preparation> {
 
         @Override
@@ -54,7 +58,8 @@ public class PreparationDAOImpl implements PreparationDAO {
      */
     @Override
     public List<Preparation> listerPreparationsParIdRecette(long idRecette) {
-        logger.info("Dans la methode pour lister les préparations pour la recette à l'id {}",idRecette);
+        logger.info(
+                "Dans la methode pour lister les préparations pour la recette à l'id {}", idRecette);
         String sql =
                 "SELECT id_preparation, numero, texte, id_recette"
                         + " FROM preparation"
@@ -64,18 +69,27 @@ public class PreparationDAOImpl implements PreparationDAO {
     }
 
     /**
-     * Permet de récuperer une préparation par son id
+     * Permet de récuperer une préparation par son id. Si aucune préparation n'est trouvée, renvoie un
+     * logger le precisant et un optional vide.
      *
      * @param idPreparation
      * @return
      */
     @Override
     public Optional<Preparation> chercherPreparationParId(long idPreparation) {
+        logger.info("Dans chercher les preparations pour l'id {}", idPreparation);
         String sql =
                 "Select id_preparation, numero, texte, id_recette from preparation where id_preparation =?";
-        Preparation preparation =
-                jdbcTemplate.queryForObject(sql, new PreparationRowMapper(), idPreparation);
+        Optional<Preparation> optPreparation;
 
-        return Optional.of(preparation);
+        try {
+            Preparation preparation =
+                    jdbcTemplate.queryForObject(sql, new PreparationRowMapper(), idPreparation);
+            optPreparation = Optional.of(preparation);
+        } catch (DataAccessException dae) {
+            logger.error("Aucun ingrédient trouvé à cet id {}", idPreparation);
+            return Optional.empty();
+        }
+        return optPreparation;
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class StringToPreparationConverter implements Converter<String, Preparation> {
 
-    private PreparationService preparationService;
+    private final PreparationService preparationService;
 
     public StringToPreparationConverter(PreparationService preparationService) {
         this.preparationService = preparationService;
@@ -17,7 +17,7 @@ public class StringToPreparationConverter implements Converter<String, Preparati
     @Override
     public Preparation convert(String idPreparation) {
 
-        Long idPreparationLong = Long.parseLong(idPreparation);
+        long idPreparationLong = Long.parseLong(idPreparation);
 
         return preparationService.chercherPreparationParId(idPreparationLong).get();
     }

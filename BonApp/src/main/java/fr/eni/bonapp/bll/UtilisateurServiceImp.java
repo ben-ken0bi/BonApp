@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UtilisateurServiceImp implements UtilisateurService {
 
-    public final UtilisateurDAO utilisateurDAO;
+    private final UtilisateurDAO utilisateurDAO;
 
     UtilisateurServiceImp(UtilisateurDAO utilisateurDAO) {
         this.utilisateurDAO = utilisateurDAO;

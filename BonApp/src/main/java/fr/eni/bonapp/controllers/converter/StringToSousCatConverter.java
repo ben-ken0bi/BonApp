@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class StringToSousCatConverter implements Converter<String, SousCategorie> {
 
-    private SousCategorieService sousCategorieService;
+    private final SousCategorieService sousCategorieService;
 
     public StringToSousCatConverter(SousCategorieService sousCategorieService) {
         this.sousCategorieService = sousCategorieService;
@@ -17,7 +17,7 @@ public class StringToSousCatConverter implements Converter<String, SousCategorie
     @Override
     public SousCategorie convert(String idSousCategorie) {
 
-        Long idSousCategorieLong = Long.parseLong(idSousCategorie);
+        long idSousCategorieLong = Long.parseLong(idSousCategorie);
 
         return sousCategorieService.chercherSousCategorie(idSousCategorieLong).get();
     }

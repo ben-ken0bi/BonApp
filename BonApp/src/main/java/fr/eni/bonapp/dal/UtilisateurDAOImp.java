@@ -21,6 +21,12 @@ public class UtilisateurDAOImp implements UtilisateurDAO {
     this.jdbcTemplate = jdbcTemplate;
   }
 
+  /**
+   * Permet de chercher un utilisateur via son id. Si aucun utilisateur n'est trouvé, renvoie un
+   * logger le precisant et un optional vide.
+   * @param idUtilisateur
+   * @return
+   */
   @Override
   public Optional<Utilisateur> chercherUtilisateurParId(long idUtilisateur) {
     logger.info("Dans Utilisateur avec la methode pour trouver son id numéro {}", idUtilisateur);
@@ -44,6 +50,7 @@ public class UtilisateurDAOImp implements UtilisateurDAO {
       optUtilisateur = Optional.of(utilisateur);
     } catch (DataAccessException dae) {
       logger.error("Aucun utilisateur existe avec l'id suivant : {}", idUtilisateur);
+      return Optional.empty();
     }
     return optUtilisateur;
   }

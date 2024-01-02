@@ -23,25 +23,37 @@ public class MetDAOImpl implements MetDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /**
+     * Permet de chercher un met via son id. Si aucun met n'est trouvé, renvoie un
+     * logger le precisant et un optional vide.
+     * @param idMet
+     * @return
+     */
     @Override
     public Optional<Met> chercherMetParId(long idMet) {
         logger.info("Dans la recherche de met pour l'id suivant {}", idMet);
         String sql = "SELECT id_met, met FROM met WHERE id_met=?";
-        Optional<Met> optMet = Optional.empty();
+        Optional<Met> optMet;
         try {
             Met met =
                     jdbcTemplate.queryForObject(
                             sql, (ResultSet rs, int rowNum) -> new Met(rs.getLong(1), rs.getString(2)), idMet);
             optMet = Optional.of(met);
         } catch (DataAccessException dae) {
-            System.out.println("Erreur chercherMetParId");
+            logger.info("Pas de met trouvé à l'id suivant {}",idMet);
+            return Optional.empty();
         }
         return optMet;
     }
 
+    /**
+     * Permet d'afficher la liste de tous les mets
+     * @return
+     */
     @Override
     public List<Met> listerMets() {
-        String sql = "SELECT id_met, met" + " FROM met";
+        logger.info("Dans lister les mets");
+        String sql = "SELECT id_met, met FROM met";
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Met>(Met.class));
     }

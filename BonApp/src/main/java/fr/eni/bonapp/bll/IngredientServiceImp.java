@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class IngredientServiceImp implements IngredientService {
-    public final IngredientDAO ingredientDAO;
+    private final IngredientDAO ingredientDAO;
 
     IngredientServiceImp(IngredientDAO ingredientDAO) {
         this.ingredientDAO = ingredientDAO;
