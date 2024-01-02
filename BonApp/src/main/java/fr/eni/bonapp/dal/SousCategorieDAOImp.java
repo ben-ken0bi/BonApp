@@ -79,11 +79,5 @@ public class SousCategorieDAOImp implements SousCategorieDAO {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(SousCategorie.class));
     }
 
-    @Override
-    public Optional<SousCategorie> chercherCategorie(long idSousCategorie) {
-        //        Select id_sous_categorie, sc.nom, c.nom from sous_categorie sc
-        //        left join categorie c on sc.id_categorie=c.id_categorie
-        //        where id_sous_categorie =1
-        return Optional.empty();
-    }
+
 }

@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface SousCategorieService {
     Optional<SousCategorie> chercherSousCategorie(long idSousCategorie);
 
-    public List<SousCategorie> listerSousCategories();
+    List<SousCategorie> listerSousCategories();
 }

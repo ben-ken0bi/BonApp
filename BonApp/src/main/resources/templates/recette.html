@@ -21,9 +21,8 @@
     <br>
     <div>
         <label>Commentaire :</label>
-        <p th:text="${recette.listeCommentaires}"></p>
         <div th:each="commentaire : ${recette.listeCommentaires}">
-            [[${commentaire.date}]]- [[${commentaire.commantaire}]]
+            [[${commentaire.date}]]- [[${commentaire.commentaire}]]
         </div>
     </div>
     <br>
@@ -38,12 +37,11 @@
     <br>
     <div>
         <label>Etat :</label>
-        <p th:text="${recette.etat}"></p>
+        <p th:text="${recette.etat.libelle}"></p>
     </div>
     <br>
     <div>
         <label>Préparations :</label>
-        <p th:text="${recette.listePreparation}"></p>
         <div th:each="preparation : ${recette.listePreparation}">
             [[${preparation.numero}]])  [[${preparation.texte}]]
         </div>
