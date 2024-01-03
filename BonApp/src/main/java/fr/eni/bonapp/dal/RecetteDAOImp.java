@@ -1,20 +1,27 @@
 package fr.eni.bonapp.dal;
 
 import fr.eni.bonapp.bo.*;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class RecetteDAOImp implements RecetteDAO {
@@ -129,5 +136,113 @@ public class RecetteDAOImp implements RecetteDAO {
      */
     @Override
     public void ajouterRecette(Recette recette) {
+        KeyHolder generatedKey = new GeneratedKeyHolder();
+        String sql =
+                "insert into recette (titre, image, id_etat, id_utilisateur, id_met) "
+                        + "values (:titre, :image, :id_etat, :id_utilisateur, :id_met)";
+
+        SqlParameterSource paramSrc =
+                new MapSqlParameterSource()
+                        .addValue("titre", recette.getTitre())
+                        .addValue("image", recette.getImage())
+                        .addValue("id_etat", recette.getEtat().getIdEtat())
+                        .addValue("id_utilisateur", recette.getUtilisateur().getIdUtilisateur())
+                        .addValue("id_met", recette.getMet().getIdMet());
+
+        recette.setIdRecette(generatedKey.getKey().longValue());
+
+        ajoutPreparation(recette.getListePreparation(), recette.getIdRecette());
+        ajouterCommentaire(recette.getListeCommentaires(), recette.getIdRecette());
+
+        ajouterIngredient(recette.getListeIngredients(), recette.getIdRecette());
+
+        namedParameterJdbcTemplate.update(sql, paramSrc, generatedKey);
+    }
+
+    /**
+     * Permet d'ajouter une liste de préparation pour la création d'une recette.
+     * Cette methode est implémentée dans ajouterRecette()
+     *
+     * @param preparations
+     * @param idRecettte
+     */
+    @Override
+    public void ajoutPreparation(List<Preparation> preparations, long idRecettte) {
+        logger.info("ajout de la liste de préparations pour la création d'une recette");
+        String sql =
+                "INSERT INTO preparation (numero,texte,id_recette) VALUES(:numero,:texte,:id_recette)";
+
+        jdbcTemplate.batchUpdate(
+                sql,
+                new BatchPreparedStatementSetter() {
+                    @Override
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        ps.setInt(1, preparations.get(i).getNumero());
+                        ps.setString(2, preparations.get(i).getTexte());
+                        ps.setLong(3, idRecettte);
+                    }
+
+                    @Override
+                    public int getBatchSize() {
+                        return preparations.size();
+                    }
+                });
+    }
+
+    /**
+     * Permet d'ajouter une liste de commentaires pour la création d'une recette.
+     * Cette methode est implémentée dans ajouterRecette().
+     *
+     * @param commentaires
+     * @param idRecette
+     */
+    @Override
+    public void ajouterCommentaire(List<Commentaire> commentaires, long idRecette) {
+        logger.info("ajout de la liste de commentaires pour la création d'une recette");
+        String sql =
+                "Insert into commentaire (date, commentaire, id_recette) Values (:date,:commentaire,:id_recette)";
+        jdbcTemplate.batchUpdate(
+                sql,
+                new BatchPreparedStatementSetter() {
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        ps.setDate(1, Date.valueOf(LocalDate.now()));
+                        ps.setString(2, commentaires.get(i).getCommentaire());
+                        ps.setLong(3, idRecette);
+                    }
+
+                    public int getBatchSize() {
+                        return commentaires.size();
+                    }
+                });
+    }
+
+    /**
+     * Permet d'ajouter une liste d'ingrédients pour la création d'une recette.
+     * Cette methode est implémentée dans ajouterRecette().
+     *
+     * @param ingredients
+     * @param idRecettte
+     */
+    @Override
+    public void ajouterIngredient(List<Ingredient> ingredients, long idRecettte) {
+        logger.info("ajout de la liste d'ingrédients pour la création d'une recette");
+        String sql =
+                "insert into recette_ingredient (id_recette, id_ingredient, quantite, id_mesure) "
+                        + "values (:id_recette,:id_ingredient, :quantite, :id_mesure)";
+
+        jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setLong(1, idRecettte);
+                ps.setLong(2, ingredients.get(i).getIdIngredient());
+                ps.setDouble(3, ingredients.get(i).getQuantite());
+                ps.setLong(4, ingredients.get(i).getMesure().getIdMesure());
+            }
+
+            @Override
+            public int getBatchSize() {
+                return ingredients.size();
+            }
+        });
     }
 }

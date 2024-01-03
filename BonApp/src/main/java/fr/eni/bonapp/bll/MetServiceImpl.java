@@ -8,7 +8,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("MetService")
 public class MetServiceImpl implements MetService {
     MetDAO metDAO;
 

@@ -11,4 +11,5 @@ public interface RecetteService {
     List<Recette> listerRecettesParUtilisateur(long idUtilisateur);
 
     List<Recette> listerRecettesParUtilisateurMet(long idUtilisateur, long idMet);
+    void ajouterRecette(Recette recette);
 }

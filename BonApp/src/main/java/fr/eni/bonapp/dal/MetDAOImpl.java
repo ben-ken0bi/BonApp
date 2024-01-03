@@ -41,6 +41,7 @@ public class MetDAOImpl implements MetDAO {
 
     @Override
     public List<Met> listerMets() {
+        logger.info("Dans la methode pour lister les mets");
         String sql = "SELECT id_met, met" + " FROM met";
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Met>(Met.class));
