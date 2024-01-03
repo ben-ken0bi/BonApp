@@ -8,7 +8,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("IngredientService")
 public class IngredientServiceImp implements IngredientService {
     public final IngredientDAO ingredientDAO;
 

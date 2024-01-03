@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="/styles/ajoutRecette.css">
 </head>
 <body>
-<h1>Form</h1>
+<h1>Créer recette</h1>
 <div>
+    <h2>Créer une recette </h2>
 
     <form method="post" th:action="@{'/formRecette'}" th:object="${recetteDTO}">
         <div>
@@ -28,19 +29,24 @@
                 <option th:each="etat : ${etats}" th:value="${etat.getIdEtat()}" th:text="${etat.libelle}"></option>
             </select>
         </div>
-        <!--        ajouter bouton submit pour ce form-->
-        <!--fin du premier formulaire-->
+        <button type="submit">Valider</button>
+    </form>
+</div>
+
+<div>
+    <br>
+    <h2>Ajouter les ingrédients </h2>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <form method="post" th:action="@{'/formRecette'}" th:object="${ingredientDTO}">
         <div>
             <!--nouveau formulaire
             on va ajouter les ingrédients un par un
             -->
             <!--            ajout input hidden pour recup l'id de la recette-->
-            <label>Ajouter ingrédients :</label>
-            <div id="ingredientSelectDiv">
-
+            <div>
                 <label>Ingrédient :</label>
-                <select id="item-entry-ingredient" th:field="*{listeIngredient}" required>
-                    <th:block th:each="ingredient : ${ingredients}">
+                <select th:field="*{id}" required>
+                    <th:block th:each="ingredient : ${@IngredientService.listerIngredients()}">
                         <option th:value="${ingredient.getIdIngredient()}"
                                 th:text="${ingredient.nom}"></option>
                     </th:block>
@@ -48,13 +54,14 @@
             </div>
 
             <div>
-                <label>Quantité :</label>
-                <input type="number" id="item-entry-quantite">
+                <label>Quantité :
+                    <input type="number" th:field="*{quantite}">
+                </label>
             </div>
 
             <div>
                 <label>Mesure :</label>
-                <select id="item-entry-mesure" th:field="*{idMesure}" required>
+                <select th:field="*{idMesure}" required>
                     <th:block th:each="mesure : ${mesures}">
                         <option th:value="${mesure.getIdMesure()}"
                                 th:text="${mesure.mesure}"></option>
@@ -62,22 +69,34 @@
                 </select>
             </div>
 
-            <button type="submit" id="ajoutItem-button">Ajouter</button>
-            <button type="button" id="clear-completed-button">Supprimer</button>
-            <button type="button" id="save-button">Sauvegarder</button>
-            <div>
-                <ol id="item-list"></ol>
-            </div>
-            <!--ajout bouton submit -->
+            <button type="submit">Ajouter</button>
         </div>
-
     </form>
-    <!--nouveau form pour les preparations
-    pareil que pour les ingrédients on va les ajouter une à une
-
-    -->
 </div>
 
-<script src="/js/ajoutItem.js"></script>
+<div>
+    <h2>Ajouter les étapes de préparation</h2>
+    <form>
+        <!--        rajouter l'auto incrémentation du numéro de l'étape ?-->
+        <label>Étapes :
+            <input type="text">
+        </label>
+        <button type="submit">Ajouter</button>
+    </form>
+</div>
+
+<div>
+    <h2>Ajouter un commentaire</h2>
+    <form>
+        <label>Commentaires :
+            <input type="text">
+        </label>
+        <button type="submit">Ajouter</button>
+    </form>
+</div>
+<!--nouveau form pour les preparations
+pareil que pour les ingrédients on va les ajouter une à une
+
+-->
 </body>
 </html>

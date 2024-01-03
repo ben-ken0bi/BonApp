@@ -2,6 +2,9 @@ package fr.eni.bonapp.controllers;
 
 import fr.eni.bonapp.bll.*;
 import fr.eni.bonapp.bo.*;
+import fr.eni.bonapp.dto.CommentaireDTO;
+import fr.eni.bonapp.dto.IngredientDTO;
+import fr.eni.bonapp.dto.PreparationDTO;
 import fr.eni.bonapp.dto.RecetteDTO;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -57,13 +60,17 @@ public class RecetteController {
     }
 
     @GetMapping("/ajoutRecette")
-    public String formulaireAjoutRecette(Model model, @ModelAttribute RecetteDTO recetteDTO) {
+    public String formulaireAjoutRecette(Model model, RecetteDTO recetteDTO, IngredientDTO ingredientDTO, PreparationDTO preparationDTO, CommentaireDTO commentaireDTO) {
         List<Met> mets = metService.listerMets();
         List<Etat> etats = etatService.listerEtats();
         List<Ingredient> ingredients = ingredientService.listerIngredients();
         List<Mesure> mesures = mesureService.listerMesures();
 
         model.addAttribute("recetteDTO", recetteDTO);
+        model.addAttribute("ingredientDTO", ingredientDTO);
+        model.addAttribute("preparationDTO", preparationDTO);
+        model.addAttribute("commentaireDTO", commentaireDTO);
+
         model.addAttribute("mets", mets);
         model.addAttribute("etats", etats);
         model.addAttribute("ingredients", ingredients);

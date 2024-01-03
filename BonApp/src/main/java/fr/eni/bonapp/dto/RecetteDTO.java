@@ -1,12 +1,5 @@
 package fr.eni.bonapp.dto;
 
-import fr.eni.bonapp.bo.Commentaire;
-import fr.eni.bonapp.bo.Ingredient;
-import fr.eni.bonapp.bo.Preparation;
-
-import java.awt.*;
-import java.util.List;
-
 public class RecetteDTO {
     private long id;
     private String titre;
@@ -14,6 +7,49 @@ public class RecetteDTO {
     private long idEtat;
     private long idUtilisateur;
     private long idMet;
+
+    public RecetteDTO() {
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public long getIdEtat() {
+        return idEtat;
+    }
+
+    public void setIdEtat(long idEtat) {
+        this.idEtat = idEtat;
+    }
+
+    public long getIdUtilisateur() {
+        return idUtilisateur;
+    }
+
+    public void setIdUtilisateur(long idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
+    }
+
+    public long getIdMet() {
+        return idMet;
+    }
+
+    public void setIdMet(long idMet) {
+        this.idMet = idMet;
+    }
 
     public long getId() {
         return id;

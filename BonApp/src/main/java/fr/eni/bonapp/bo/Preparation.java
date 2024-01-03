@@ -8,7 +8,6 @@ public class Preparation {
     private int numero;
     @NotNull
     private String texte;
-
     private Recette recette;
 
     public Preparation() {
