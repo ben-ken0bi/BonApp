@@ -1,13 +1,7 @@
 package fr.eni.bonapp.controllers;
 
-import fr.eni.bonapp.bll.EtatService;
-import fr.eni.bonapp.bll.IngredientService;
-import fr.eni.bonapp.bll.MetService;
-import fr.eni.bonapp.bll.RecetteService;
-import fr.eni.bonapp.bo.Etat;
-import fr.eni.bonapp.bo.Ingredient;
-import fr.eni.bonapp.bo.Met;
-import fr.eni.bonapp.bo.Recette;
+import fr.eni.bonapp.bll.*;
+import fr.eni.bonapp.bo.*;
 import fr.eni.bonapp.dto.RecetteDTO;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -31,15 +25,19 @@ public class RecetteController {
     private final EtatService etatService;
     private final IngredientService ingredientService;
 
+    private final MesureService mesureService;
+
     RecetteController(
             RecetteService recetteService,
             MetService metService,
             EtatService etatService,
-            IngredientService ingredientService) {
+            IngredientService ingredientService,
+            MesureService mesureService) {
         this.recetteService = recetteService;
         this.metService = metService;
         this.etatService = etatService;
         this.ingredientService = ingredientService;
+        this.mesureService = mesureService;
     }
 
     @GetMapping("/recettes")
@@ -59,15 +57,17 @@ public class RecetteController {
     }
 
     @GetMapping("/ajoutRecette")
-    public String formulaireAjoutRecette(Model model, @ModelAttribute Recette recette) {
+    public String formulaireAjoutRecette(Model model, @ModelAttribute RecetteDTO recetteDTO) {
         List<Met> mets = metService.listerMets();
         List<Etat> etats = etatService.listerEtats();
         List<Ingredient> ingredients = ingredientService.listerIngredients();
+        List<Mesure> mesures = mesureService.listerMesures();
 
-        model.addAttribute("recette",recette);
+        model.addAttribute("recetteDTO", recetteDTO);
         model.addAttribute("mets", mets);
         model.addAttribute("etats", etats);
         model.addAttribute("ingredients", ingredients);
+        model.addAttribute("mesures",mesures);
 
         return "ajoutRecette";
     }

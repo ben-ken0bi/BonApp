@@ -40,7 +40,7 @@ public class EtatDAOImpl implements EtatDAO {
 
     @Override
     public List<Etat> listerEtats() {
-        String sql = "SELECT id_etat, libelle FROM etat";
+        String sql = "SELECT id_etat, libelle FROM etat order by id_etat asc";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Etat.class));
     }
 }

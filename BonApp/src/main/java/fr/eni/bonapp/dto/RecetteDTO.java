@@ -17,6 +17,16 @@ public class RecetteDTO {
     private List<Commentaire> listeCommentaires;
     private long idUtilisateur;
     private long idMet;
+    private long idMesure;
+    private long idQuantité;
+
+    public long getIdMesure() {
+        return idMesure;
+    }
+
+    public void setIdMesure(long idMesure) {
+        this.idMesure = idMesure;
+    }
 
     public long getId() {
         return id;

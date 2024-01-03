@@ -26,7 +26,7 @@ public class MetDAOImpl implements MetDAO {
     @Override
     public Optional<Met> chercherMetParId(long idMet) {
         logger.info("Dans la recherche de met pour l'id suivant {}", idMet);
-        String sql = "SELECT id_met, met FROM met WHERE id_met=?";
+        String sql = "SELECT id_met, nom FROM met WHERE id_met=?";
         Optional<Met> optMet = Optional.empty();
         try {
             Met met =
@@ -42,7 +42,7 @@ public class MetDAOImpl implements MetDAO {
     @Override
     public List<Met> listerMets() {
         logger.info("Dans la methode pour lister les mets");
-        String sql = "SELECT id_met, met" + " FROM met";
+        String sql = "SELECT id_met, nom" + " FROM met";
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Met>(Met.class));
     }
