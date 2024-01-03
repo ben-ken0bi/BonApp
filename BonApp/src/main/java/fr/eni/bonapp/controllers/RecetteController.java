@@ -26,8 +26,9 @@ public class RecetteController {
    * @return
    */
   @GetMapping("/recettes")
-  public String afficherToutesLesRecettes() {
-    return "recettes";
+  public String afficherToutesLesRecettes(Model model, long idUtilisateur) {
+    model.addAttribute("recettes", recetteService.listerRecettesParUtilisateur( idUtilisateur));
+    return ("/recettes");
   }
 
   /**
