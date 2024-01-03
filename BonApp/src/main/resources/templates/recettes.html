@@ -2,20 +2,21 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/static/css/recette.css}" />
     <title>Recettes</title>
 </head>
 <body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<div th:each="recette : ${recettes}">
-    <div class="card">
-        <div th:text="${recette.titre}"></div>
-        <div th:text="${recette.image}"></div>
-        <div th:text="${recette.etat.libelle}"></div>
-        <div th:text="${recette.met.nom}"></div>
+<div class="listRecette">
+    <div class="cardRecette multi" th:each="recette : ${recettes}">
+        <h3 th:text="${recette.titre}"> Ma recette : </h3>
+        <p th:text="'Met : ' +${recette.annee}"></p>
+        <a th:href="@{'/.../=' + ${recettes.idRecette}}">Détails</a>
+        <img th:src="@{'/' + ${film.id}}" alt="Film Image">
+        <img th:src="@{'/images/recette_default.avif'}">
     </div>
 </div>
-
-
-
 </body>
 </html>

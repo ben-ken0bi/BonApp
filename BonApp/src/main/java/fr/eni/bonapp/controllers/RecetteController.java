@@ -22,15 +22,16 @@ public class RecetteController {
         this.recetteService = recetteService;
     }
 
-    /**
-     * Permet d'afficher sur une page HTML toutes les recettes renvoie sur la page recettes dédiée
-     *
-     * @return
-     */
-    @GetMapping("/recettes")
-    public String afficherToutesLesRecettes() {
-        return "recettes";
-    }
+  /**
+   * Permet d'afficher sur une page HTML toutes les recettes renvoie sur la page recettes dédiée
+   *
+   * @return
+   */
+  @GetMapping("/recettes")
+  public String afficherToutesLesRecettes(Model model, long idUtilisateur) {
+    model.addAttribute("recettes", recetteService.listerRecettesParUtilisateur( idUtilisateur));
+    return ("/recettes");
+  }
 
     /**
      * Permet d'afficher sur une page HTML le détail d'une recette renvoie sur la page recettes dédiée
