@@ -3,36 +3,34 @@ package fr.eni.bonapp.bo;
 import jakarta.validation.constraints.NotNull;
 
 public class Met {
-    private long idMet;
-    @NotNull
-    private String typeMet;
+  private long idMet;
+  @NotNull private String nom;
 
-    public Met() {
-    }
+  public Met() {}
 
-    public Met(long idMet, String typeMet) {
-        this.idMet = idMet;
-        this.typeMet = typeMet;
-    }
+  public Met(long idMet, String nom) {
+    this.idMet = idMet;
+    this.nom = nom;
+  }
 
-    public long getIdMet() {
-        return idMet;
-    }
+  public long getIdMet() {
+    return idMet;
+  }
 
-    public void setIdMet(long idMet) {
-        this.idMet = idMet;
-    }
+  public void setIdMet(long idMet) {
+    this.idMet = idMet;
+  }
 
-    public String getTypeMet() {
-        return typeMet;
-    }
+  public String getNom() {
+    return nom;
+  }
 
-    public void setTypeMet(String typeMet) {
-        this.typeMet = typeMet;
-    }
+  public void setNom(String nom) {
+    this.nom = nom;
+  }
 
-    @Override
-    public String toString() {
-        return "Met{" + "idMet=" + idMet + ", typeMet='" + typeMet + '\'' + '}';
-    }
+  @Override
+  public String toString() {
+    return "Met{" + "idMet=" + idMet + ", nom='" + nom + '\'' + '}';
+  }
 }
