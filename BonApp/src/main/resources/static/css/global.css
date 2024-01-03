@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Century+Gothic:wght@400;700&display=swap');
+
+:root {
+    --bg-primary : #0E0325;
+    --btn-primary : #241f3a ;
+    --police-principale : 'Century Gothic', Arial, sans-serif;
+    --police-primary : #8BC5BB;
+    --police-contour : #009688;
+
+
+    /** CSS DARK THEME PRIMARY COLORS */
+    --color-primary-100:  #8bc5bb;
+    --color-primary-200:  #98cbc2;
+    --color-primary-300:  #a5d2ca;
+    --color-primary-400:  #b2d8d1;
+    --color-primary-500:  #bfdfd9;
+    --color-primary-600:  #cce5e0;
+    /** CSS DARK THEME SURFACE COLORS */
+    --color-surface-100:  #0e0325;
+    --color-surface-200:  #241f3a;
+    --color-surface-300:  #3c364f;
+    --color-surface-400:  #555066;
+    --color-surface-500:  #6f6a7e;
+    --color-surface-600:  #8a8696;
+    /** CSS DARK THEME MIXED SURFACE COLORS */
+    --color-surface-mixed-100:  #191932;
+    --color-surface-mixed-200:  #2f2e46;
+    --color-surface-mixed-300:  #46445b;
+    --color-surface-mixed-400:  #5e5c70;
+    --color-surface-mixed-500:  #777587;
+    --color-surface-mixed-600:  #918f9e;
+
+    background-color: var(--bg-primary);
+    font-family: var(--police-principale);
+    color: var(--police-primary);
+}
+body, h1, h2, h3, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
+    margin: 0;
+    padding: 0;
+}
