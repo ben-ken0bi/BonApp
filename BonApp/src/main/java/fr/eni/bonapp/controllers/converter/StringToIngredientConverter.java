@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class StringToIngredientConverter implements Converter<String, Ingredient> {
 
-    private IngredientService ingredientService;
+    private final IngredientService ingredientService;
 
     public StringToIngredientConverter(IngredientService ingredientService) {
         this.ingredientService = ingredientService;
@@ -17,7 +17,7 @@ public class StringToIngredientConverter implements Converter<String, Ingredient
     @Override
     public Ingredient convert(String idIngredient) {
 
-        Long idIngredientLong = Long.parseLong(idIngredient);
+        long idIngredientLong = Long.parseLong(idIngredient);
 
         return ingredientService.chercherIngredientParId(idIngredientLong).get();
     }

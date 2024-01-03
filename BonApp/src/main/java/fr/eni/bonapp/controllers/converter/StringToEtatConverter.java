@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class StringToEtatConverter implements Converter<String, Etat> {
-    private EtatService etatService;
+    private final EtatService etatService;
 
     public StringToEtatConverter(EtatService etatService) {
         this.etatService = etatService;

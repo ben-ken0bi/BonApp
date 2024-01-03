@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class StringToCommentaireConverter implements Converter<String, Commentaire> {
-    private CommentaireService commentaireService;
+    private final CommentaireService commentaireService;
 
     public StringToCommentaireConverter(CommentaireService commentaireService) {
         this.commentaireService = commentaireService;

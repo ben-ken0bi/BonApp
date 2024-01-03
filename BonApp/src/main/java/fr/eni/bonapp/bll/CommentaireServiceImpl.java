@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CommentaireServiceImpl implements CommentaireService {
-    private CommentaireDAO commentaireDAO;
+    private final CommentaireDAO commentaireDAO;
 
     CommentaireServiceImpl(CommentaireDAO commentaireDAO) {
         this.commentaireDAO = commentaireDAO;

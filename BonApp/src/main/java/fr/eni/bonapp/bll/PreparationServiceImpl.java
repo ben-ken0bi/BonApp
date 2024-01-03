@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PreparationServiceImpl implements PreparationService {
-    private PreparationDAO preparationDAO;
+    private final PreparationDAO preparationDAO;
 
     PreparationServiceImpl(PreparationDAO preparationDAO) {
         this.preparationDAO = preparationDAO;
