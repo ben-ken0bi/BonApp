@@ -21,7 +21,6 @@ public class RecetteController {
     RecetteController(RecetteService recetteService) {
         this.recetteService = recetteService;
     }
-
     /**
      * Permet d'afficher sur une page HTML toutes les recettes
      * renvoie sur la page recettes dédiée
