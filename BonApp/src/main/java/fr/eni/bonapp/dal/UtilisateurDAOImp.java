@@ -31,7 +31,7 @@ public class UtilisateurDAOImp implements UtilisateurDAO {
   public Optional<Utilisateur> chercherUtilisateurParId(long idUtilisateur) {
     logger.info("Dans Utilisateur avec la methode pour trouver son id numéro {}", idUtilisateur);
     String sql =
-        "Select id_utilisateur, pseudo, mdp, nom, prenom, email from utilisateur where id_utilisateur =?";
+        "Select id_utilisateur, pseudo, mdp, nom, prenom, email, admin from utilisateur where id_utilisateur =?";
     Optional<Utilisateur> optUtilisateur = Optional.empty();
 
     try {
@@ -45,12 +45,49 @@ public class UtilisateurDAOImp implements UtilisateurDAO {
                       rs.getString(3),
                       rs.getString(4),
                       rs.getString(5),
-                      rs.getString(6)),
+                      rs.getString(6),
+                      rs.getBoolean(7)),
               idUtilisateur);
       optUtilisateur = Optional.of(utilisateur);
     } catch (DataAccessException dae) {
       logger.error("Aucun utilisateur existe avec l'id suivant : {}", idUtilisateur);
       return Optional.empty();
+    }
+    return optUtilisateur;
+  }
+
+  @Override
+  public Optional<Utilisateur> chercherUtilisateurParPseudo(String pseudo) {
+    logger.info("Dans Utilisateur avec la methode pour trouver son pseudo {}", pseudo);
+    String sql =
+        "Select id_utilisateur,nom,prenom, pseudo,mdp, email, admin from utilisateur where pseudo =?";
+    Optional<Utilisateur> optUtilisateur = Optional.empty();
+
+    try {
+      Utilisateur utilisateur =
+          jdbcTemplate.queryForObject(
+              sql,
+              (ResultSet rs, int rowNum) ->
+                  new Utilisateur(
+                      rs.getLong(1),
+                      rs.getString(2),
+                      rs.getString(3),
+                      rs.getString(4),
+                      rs.getString(5),
+                      rs.getString(6),
+                      rs.getBoolean(7)),
+              pseudo);
+
+//      this.idUtilisateur = idUtilisateur;
+//      this.nom = nom;
+//      this.prenom = prenom;
+//      this.pseudo = pseudo;
+//      this.mdp = mdp;
+//      this.email = email;
+//      this.admin = admin;
+      optUtilisateur = Optional.of(utilisateur);
+    } catch (DataAccessException dae) {
+      logger.error("Aucun utilisateur existe avec le pseudo suivant : {}", pseudo);
     }
     return optUtilisateur;
   }
