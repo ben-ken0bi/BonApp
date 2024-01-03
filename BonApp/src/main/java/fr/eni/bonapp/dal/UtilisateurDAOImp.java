@@ -53,7 +53,7 @@ public class UtilisateurDAOImp implements UtilisateurDAO {
   public Optional<Utilisateur> chercherUtilisateurParPseudo(String pseudo) {
     logger.info("Dans Utilisateur avec la methode pour trouver son pseudo {}", pseudo);
     String sql =
-        "Select id_utilisateur, pseudo, mdp, nom, prenom, email, admin from utilisateur where pseudo =?";
+        "Select id_utilisateur,nom,prenom, pseudo,mdp, email, admin from utilisateur where pseudo =?";
     Optional<Utilisateur> optUtilisateur = Optional.empty();
 
     try {
@@ -70,6 +70,14 @@ public class UtilisateurDAOImp implements UtilisateurDAO {
                       rs.getString(6),
                       rs.getBoolean(7)),
               pseudo);
+
+//      this.idUtilisateur = idUtilisateur;
+//      this.nom = nom;
+//      this.prenom = prenom;
+//      this.pseudo = pseudo;
+//      this.mdp = mdp;
+//      this.email = email;
+//      this.admin = admin;
       optUtilisateur = Optional.of(utilisateur);
     } catch (DataAccessException dae) {
       logger.error("Aucun utilisateur existe avec le pseudo suivant : {}", pseudo);
