@@ -11,8 +11,11 @@ supprimerItemBouton.addEventListener('click', clearCompletedItems);
 
 //fonction pour ajouter un item
 function addItem() {
-    var itemText = itemEntryBox.value;
-    newItem(itemText, false);
+    var itemText = itemEntryIngredient.value;
+    var itemQuantite = itemEntryQuantite.value;
+    var itemMesure = itemEntryMesure.value;
+
+    newItem(itemText, itemQuantite, itemMesure, false);
 }
 
 //Implémentation de la liste d'item
@@ -22,17 +25,22 @@ var itemEntryMesure = document.getElementById('item-entry-mesure');
 var itemList = document.getElementById('item-list');
 
 //fonction pour ajouter un nouvel item à la liste
-function newItem(itemText, completed) {
+function newItem(itemText, itemQuantite, itemMesure, completed) {
     var item = document.createElement('li');
     var itemAjouteText = document.createTextNode(itemText);
-    item.appendChild(itemText);
+    var itemAjouteQuantite =document.createTextNode(itemQuantite);
+    var itemAjouteMesure =document.createTextNode(itemMesure);
+
+    item.appendChild(itemAjouteText);
+    item.appendChild(itemAjouteQuantite);
+    item.appendChild(itemAjouteMesure);
 
     if (completed) {
         item.classList.add('completed');
     }
 
     itemList.appendChild(item);
-    item.addEventListener('dblclick', toggleItemState);
+    item.addEventListener('click', toggleItemState);
 }
 
 function toggleItemState() {
