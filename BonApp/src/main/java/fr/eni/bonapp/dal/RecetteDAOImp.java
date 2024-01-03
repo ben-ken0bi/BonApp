@@ -118,10 +118,10 @@ public class RecetteDAOImp implements RecetteDAO {
     public List<Recette> listerRecettesParUtilisateur(long idUtilisateur) {
         logger.info("Dans lister recette par utilisateur avec l'id {}", idUtilisateur);
         String sql =
-                "SELECT R.id_recette, R.titre, R.image, R.id_etat, E.libelle, R.id_utilisateur, R.id_met, M.met"
-                        + "FROM recette R"
-                        + "JOIN etat E ON R.id_etat = E.id_etat"
-                        + "JOIN met M ON R.id_met = M.id_met"
+                "SELECT R.id_recette, R.titre, R.image, R.id_etat, E.libelle, R.id_utilisateur, R.id_met, M.nom "
+                        + "FROM recette R "
+                        + "JOIN etat E ON R.id_etat = E.id_etat "
+                        + "JOIN met M ON R.id_met = M.id_met "
                         + "WHERE R.id_utilisateur=?";
 
         List<Recette> recettes =
@@ -147,11 +147,11 @@ public class RecetteDAOImp implements RecetteDAO {
     public List<Recette> listerRecettesParUtilisateurMet(long idUtilisateur, long idMet) {
         logger.info("Dans lister les recettes pour l'utilisateur {} et le type de met id {}", idUtilisateur, idMet);
         String sql =
-                "SELECT R.id_recette, R.titre, R.image, R.id_etat, E.libelle, R.id_utilisateur, R.id_met, M.met"
-                        + "FROM recette R"
-                        + "JOIN etat E ON R.id_etat = E.id_etat"
-                        + "JOIN met M ON R.id_met = M.id_met"
-                        + "WHERE R.id_utilisateur=? AND R.id_met=?";
+                "SELECT R.id_recette, R.titre, R.image, R.id_etat, E.libelle, R.id_utilisateur, R.id_met, M.nom "
+                        + "FROM recette R "
+                        + "JOIN etat E ON R.id_etat = E.id_etat "
+                        + "JOIN met M ON R.id_met = M.id_met "
+                        + "WHERE R.id_utilisateur=? AND R.id_met=? ";
         return jdbcTemplate.query(sql, new RecetteDAOImp.RecetteRowMapper(), idUtilisateur, idMet);
     }
 
@@ -166,7 +166,7 @@ public class RecetteDAOImp implements RecetteDAO {
     public List<Recette> listerRecettesParUtilisateurEtat(long idUtilisateur, long idEtat) {
         logger.info("Dans lister les recettes pour l'utilisateur {} et le type de met id {} ", idUtilisateur, idEtat);
         String sql =
-                "SELECT R.id_recette, R.titre, R.image, R.id_etat, E.libelle, R.id_utilisateur, R.id_met, M.met " +
+                "SELECT R.id_recette, R.titre, R.image, R.id_etat, E.libelle, R.id_utilisateur, R.id_met, M.nom " +
                         "FROM recette R JOIN etat E ON R.id_etat = E.id_etat " +
                         "JOIN met M ON R.id_met = M.id_met " +
                         "WHERE R.id_utilisateur=? AND R.id_etat=?";

@@ -71,7 +71,7 @@ public class RecetteController {
      */
     @GetMapping("/recettes/{idUtilisateur}")
     public String afficherRecettesParUtilisateur(
-            @PathVariable("id") long idUtilisateur, Model model) {
+            @PathVariable("idUtilisateur") long idUtilisateur, Model model) {
         logger.info("Affichage des recettes pour l'utilisateur avec l'id {}", idUtilisateur);
 
         // Assuming recetteService has a method to retrieve recipes by user ID
