@@ -11,11 +11,11 @@ supprimerItemBouton.addEventListener('click', clearCompletedItems);
 
 //fonction pour ajouter un item
 function addItem() {
-    var itemText = itemEntryIngredient.value;
+    var itemText =itemEntryIngredient.options[itemEntryIngredient.selectedIndex].text;
     var itemQuantite = itemEntryQuantite.value;
-    var itemMesure = itemEntryMesure.value;
+    var itemMesure = itemEntryMesure.options[itemEntryMesure.selectedIndex].text;
 
-    newItem(itemText, itemQuantite, itemMesure, false);
+    newItem(itemText, itemQuantite, itemMesure);
 }
 
 //Implémentation de la liste d'item
@@ -25,19 +25,16 @@ var itemEntryMesure = document.getElementById('item-entry-mesure');
 var itemList = document.getElementById('item-list');
 
 //fonction pour ajouter un nouvel item à la liste
-function newItem(itemText, itemQuantite, itemMesure, completed) {
+function newItem(itemText, itemQuantite, itemMesure) {
     var item = document.createElement('li');
     var itemAjouteText = document.createTextNode(itemText);
-    var itemAjouteQuantite =document.createTextNode(itemQuantite);
-    var itemAjouteMesure =document.createTextNode(itemMesure);
+    var itemAjouteQuantite = document.createTextNode(itemQuantite);
+    var itemAjouteMesure = document.createTextNode(itemMesure);
 
     item.appendChild(itemAjouteText);
     item.appendChild(itemAjouteQuantite);
     item.appendChild(itemAjouteMesure);
 
-    if (completed) {
-        item.classList.add('completed');
-    }
 
     itemList.appendChild(item);
     item.addEventListener('click', toggleItemState);

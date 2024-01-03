@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire recette</title>
+    <link rel="stylesheet" href="/styles/ajoutRecette.css">
+</head>
+<body>
+<h1>Form</h1>
+<div>
+
+    <form method="post" th:action="@{'/formRecette'}" th:object="${recetteDTO}">
+        <div>
+            <label>Titre * :</label>
+            <input type="text" th:text="*{titre}">
+        </div>
+
+        <div>
+            <label>Met * :</label>
+            <select th:field="*{idMet}" required>
+                <option th:each="met : ${mets}" th:value="${met.getIdMet()}" th:text="${met.nom}"></option>
+            </select>
+        </div>
+
+        <div>
+            <label>Etat * :</label>
+            <select th:field="*{idEtat}" required>
+                <option th:each="etat : ${etats}" th:value="${etat.getIdEtat()}" th:text="${etat.libelle}"></option>
+            </select>
+        </div>
+        <!--        ajouter bouton submit pour ce form-->
+        <!--fin du premier formulaire-->
+        <div>
+            <!--nouveau formulaire
+            on va ajouter les ingrédients un par un
+            -->
+            <!--            ajout input hidden pour recup l'id de la recette-->
+            <label>Ajouter ingrédients :</label>
+            <div id="ingredientSelectDiv">
+
+                <label>Ingrédient :</label>
+                <select id="item-entry-ingredient" th:field="*{listeIngredient}" required>
+                    <th:block th:each="ingredient : ${ingredients}">
+                        <option th:value="${ingredient.getIdIngredient()}"
+                                th:text="${ingredient.nom}"></option>
+                    </th:block>
+                </select>
+            </div>
+
+            <div>
+                <label>Quantité :</label>
+                <input type="number" id="item-entry-quantite">
+            </div>
+
+            <div>
+                <label>Mesure :</label>
+                <select id="item-entry-mesure" th:field="*{idMesure}" required>
+                    <th:block th:each="mesure : ${mesures}">
+                        <option th:value="${mesure.getIdMesure()}"
+                                th:text="${mesure.mesure}"></option>
+                    </th:block>
+                </select>
+            </div>
+
+            <button type="submit" id="ajoutItem-button">Ajouter</button>
+            <button type="button" id="clear-completed-button">Supprimer</button>
+            <button type="button" id="save-button">Sauvegarder</button>
+            <div>
+                <ol id="item-list"></ol>
+            </div>
+            <!--ajout bouton submit -->
+        </div>
+
+    </form>
+    <!--nouveau form pour les preparations
+    pareil que pour les ingrédients on va les ajouter une à une
+
+    -->
+</div>
+
+<script src="/js/ajoutItem.js"></script>
+</body>
+</html>
