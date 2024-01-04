@@ -1,52 +1,36 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="https://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-      
-    <head>
-        <th:block></th:block>
-        <title>MovieMap - Connexion</title>
-    </head>
-    <body>
-        <header></header>
-        
-        <main id="return-to-top">
-            <section></section>
-            
-            <section name="add-film" class="mt-50 mb-50">
-                <div class="wrapper-center">
-                    <h1 class="page_h1 text-black mb-20">Formulaire de <b class="text-secondary">connexion</b> </h1>
-                    
-					<div class="container-form">
-						
-				        <div th:if="${param.error}" class="align-center text-white mt-20">
-						    Identifiants invalides
-						</div>
-						<div th:if="${param.logout}" class="align-center text-white mt-20">
-						    Vous avez été déconnecté
-						</div>
-						
-				        <form th:action="@{/login}" method="post" class="login-form">
-			             	<label class="mt-20">Pseudo *</label>
-                            <input type="text" name="username" required/>
-                            
-                            <label class="mt-20">Mot de passe *</label>
-                            <input type="password" name="password" required/>
-				             
-				            <button type="submit" class="a_button-black mt-40">Se connecter</button>
-				        </form> 
-                    </div>
 
-                </div>
-            </section>  
-            
-        </main>
-        
-        <th:block></th:block>
-        
-        <footer></footer>
-        
-        <script src="/js/returnToTop.js"></script>
-        <script src="/js/ajoutActeur.js"></script>
-    </body>
+<head>
+    <title>BonApp' - Connexion</title>
+</head>
+<body>
+
+<div class="wrapper-center">
+    <h1>Se connecter </h1>
+
+    <div>
+        <div th:if="${param.error}">
+            Identifiants invalides
+        </div>
+        <div th:if="${param.logout}">
+            Vous avez été déconnecté
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <label>Pseudo *</label>
+            <input type="text" name="username" required/>
+
+            <label>Mot de passe *</label>
+            <input type="password" name="password" required/>
+
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
 </html>
