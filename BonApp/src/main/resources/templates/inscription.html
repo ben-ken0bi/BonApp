@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>Inscription BonApp'</title>
@@ -7,5 +8,43 @@
 <body>
 <h1>Inscription</h1>
 
+<form th:object="${utilisateur}" method="post" th:action="@{'/inscription'}">
+    <div>
+
+        <div>
+            <label>Prénom* </label>
+            <input th:field="*{prenom}" required/>
+            <p th:each="error: ${#fields.errors('prenom')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label>Nom* :</label>
+            <input th:field="*{nom}" required/>
+            <p th:each="error : ${#fields.errors('nom')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label>Pseudo* :</label>
+            <input type="text" th:field="*{pseudo}" required/>
+            <p th:each="error : ${#fields.errors('pseudo')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label>Email* :</label>
+            <input type="email" th:field="*{email}" required/>
+            <p th:each="error : ${#fields.errors('email')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label>Mot de passe* :</label>
+            <input type="password" th:field="*{mdp}" required/>
+            <p th:each="error : ${#fields.errors('mdp')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <button type="submit">Enregistrer</button>
+    </div>
+
+</form>
+<a th:href="@{/login}">login</a>
 </body>
 </html>

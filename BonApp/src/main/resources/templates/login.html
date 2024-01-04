@@ -28,6 +28,17 @@
 
             <button type="submit">Se connecter</button>
         </form>
+        <form action="/logout" method="post">
+            <!-- CSRF -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+            <button type="submit">
+                Déconnexion
+            </button>
+        </form>
+        <div sec:authorize="not isAuthenticated()">
+            <a th:href="@{/inscription}">S'inscrire</a>
+        </div>
     </div>
 
 </div>

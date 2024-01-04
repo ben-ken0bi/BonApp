@@ -19,7 +19,7 @@ public class WebSecurityConfig {
                                 requests
                                         .requestMatchers("/css/**", "/images/**", "/js/**", "/external-images/**")
                                         .permitAll()
-                                        .requestMatchers("/", "/accueil")
+                                        .requestMatchers("/", "/accueil","/inscription")
                                         .permitAll()
                                         .requestMatchers("/recettes", "/recettes/**")
                                         .permitAll()

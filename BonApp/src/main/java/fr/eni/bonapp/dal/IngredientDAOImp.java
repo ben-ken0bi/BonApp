@@ -26,7 +26,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class IngredientDAOImp implements IngredientDAO {
     Logger logger = LoggerFactory.getLogger(IngredientDAOImp.class);
-    private SousCategorieDAO sousCategorieDAO;
+    private final SousCategorieDAO sousCategorieDAO;
     private final MesureDAO mesureDAO;
 
     IngredientDAOImp(SousCategorieDAO sousCategorieDAO, MesureDAO mesureDAO) {

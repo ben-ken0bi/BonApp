@@ -21,11 +21,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UtilisateurDAOImp implements UtilisateurDAO {
     Logger logger = LoggerFactory.getLogger(UtilisateurDAOImp.class);
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
     public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.jdbcTemplate = namedParameterJdbcTemplate.getJdbcTemplate();
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+        this.jdbcTemplate = this.namedParameterJdbcTemplate.getJdbcTemplate();
     }
 
     /**
@@ -123,6 +125,6 @@ public class UtilisateurDAOImp implements UtilisateurDAO {
 
         utilisateur.setAdmin(false);
 
-        jdbcTemplate.update(sql, paramSrc, generatedKey);
+        namedParameterJdbcTemplate.update(sql, paramSrc, generatedKey);
     }
 }
