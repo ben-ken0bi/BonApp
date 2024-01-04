@@ -1,80 +1,86 @@
 @import "main.css";
 
-#recette-details {
-    max-width: 800px;
-    margin: 0 auto; /* Centrez le contenu */
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#recette-details h1 {
-    color: #333;
+.h1 {
     text-align: center;
+    margin-bottom: 2%;
 }
 
-#recette-details p {
-    color: #555;
-}
-
-.test {
-    margin-bottom: 20px;
-}
-
-label {
-    font-weight: bold;
-}
-
-/**************RECETTES**************/
-#wrapper {
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 1280px;
-    color: var(--color-surface-mixed-100);
-}
-
-.wrapper-center {
-    margin: auto;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    max-width: 1280px;
-    color: var(--color-surface-mixed-100);
+.h2 {
+    margin-top: 1%;
+    margin-bottom: 0.25%;
 }
 
 .container {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: column;
     padding: 20px 40px 40px 40px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px 0px;
     border-radius: 20px;
     background: var(--color-surface-mixed-100);
 }
 
-.recette-card_title {
+/*IMAGE*/
+.detail-recette-image {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--police-principale);
-    font-size: .8rem;
+    justify-content: center;
 }
 
-.recette-card_genre {
-    text-align: center;
-    color: var(--police-principale);
-    font-weight: 600;
-    letter-spacing: 1px;
-    font-size: .8rem;
+.img {
+    max-height: 450px;
+    width: auto;
 }
 
-.card:hover .film-card_recette,
-.card:hover .film-card_title,
-.card:hover .film-card_genre {
-    color: var(--color-primary-600);
+/*COMMENTAIRES*/
+.comment {
+    display: none;
+    padding-top: 30px;
 }
+
+#grid {
+    display: none;
+    height: 100vh;
+}
+
+#left {
+    background: var(--color-surface-mixed-300);
+}
+
+#left:hover .comment {
+    display: block;
+}
+
+.icone {
+    display: inline-block;
+}
+
+#right {
+    background: var(--bg-primary);
+    border: 3rem solid rgb(0 0 0 / 10%);
+}
+
+/* the magic */
+#grid {
+    transition: 300ms;
+    display: none;
+    grid-template-columns: 48px auto;
+}
+
+#grid:has(#left:hover) {
+    grid-template-columns: 30% auto;
+}
+
+/* magic + CSS variable */
+#grid {
+    transition: 300ms;
+    display: grid;
+    grid-template-columns: var(--left, 48px) auto;
+}
+
+#grid:has(#left:hover) {
+    --left: 30%;
+}
+.liste-commentaire{
+    margin-bottom: 3%;
+}
+
+

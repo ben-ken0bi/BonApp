@@ -2,6 +2,7 @@ package fr.eni.bonapp.bo;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -12,6 +13,7 @@ public class Commentaire {
     private String commentaire;
 
     @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date date;
 
     private Recette recette;

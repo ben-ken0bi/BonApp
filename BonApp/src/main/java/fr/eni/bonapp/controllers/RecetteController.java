@@ -38,6 +38,7 @@ public class RecetteController {
     public String afficherDetail(@PathVariable("id") long idRecette, Model model) {
         logger.info("dans l'affichage de la recette avec l'id {}", idRecette);
         Recette recette;
+
         Optional<Recette> optRecette = recetteService.chercherRecetteParId(idRecette);
         recette = optRecette.get();
 
@@ -55,7 +56,7 @@ public class RecetteController {
     @GetMapping("/recettes")
     public String afficherRecettesParUtilisateur( Authentication authentication,
             Model model) {
-        logger.info("Affichage des recettes pour l'utilisateur avec l'id {}");
+        logger.info("Affichage des recettes pour l'utilisateur avec l'id {}",authentication.getName());
         Optional<Utilisateur> user = utilisateurService.chercherUtilisateurParPseudo(authentication.getName());
         // Assuming recetteService has a method to retrieve recipes by user ID
         List<Recette> recettes = recetteService.listerRecettesParUtilisateur(user.get().getIdUtilisateur());
