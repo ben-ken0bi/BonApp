@@ -46,15 +46,50 @@ label {
     color: var(--color-surface-mixed-100);
 }
 
-.container {
+.grid-container {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 20px 40px 40px 40px;
+    gap: 20px;
+}
+
+.card {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px 0px;
     border-radius: 20px;
     background: var(--color-surface-mixed-100);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+.img {
+    max-height: 350px;
+    width: auto;
+}
+
+.card:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px 0px;
+}
+
+.recette-card_title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--police-principale);
+    font-size: 0.8rem;
+    padding: 10px; /* Ajoutez un peu de marge intérieure pour améliorer l'apparence */
+}
+
+.recette-card_genre {
+    text-align: center;
+    color: var(--police-principale);
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+}
+
+.card:hover .recette-card_recette,
+.card:hover .recette-card_title,
+.card:hover .recette-card_genre {
+    color: var(--color-primary-600);
 }
 
 .recette-card_title {
@@ -73,8 +108,6 @@ label {
     font-size: .8rem;
 }
 
-.card:hover .film-card_recette,
-.card:hover .film-card_title,
-.card:hover .film-card_genre {
-    color: var(--color-primary-600);
+.text{
+    text-align: center;
 }
