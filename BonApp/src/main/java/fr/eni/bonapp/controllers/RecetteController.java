@@ -1,13 +1,16 @@
 package fr.eni.bonapp.controllers;
 
 import fr.eni.bonapp.bll.RecetteService;
+import fr.eni.bonapp.bll.UtilisateurService;
 import fr.eni.bonapp.bo.Recette;
 
 import java.util.List;
 import java.util.Optional;
 
+import fr.eni.bonapp.bo.Utilisateur;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,21 +20,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class RecetteController {
     Logger logger = LoggerFactory.getLogger(RecetteController.class);
     private RecetteService recetteService;
+    private UtilisateurService utilisateurService;
 
-    RecetteController(RecetteService recetteService) {
+    RecetteController(RecetteService recetteService, UtilisateurService utilisateurService) {
         this.recetteService = recetteService;
+        this.utilisateurService = utilisateurService;
     }
-
-  /**
-   * Permet d'afficher sur une page HTML toutes les recettes renvoie sur la page recettes dédiée
-   *
-   * @return
-   */
-  @GetMapping("/recettes")
-  public String afficherToutesLesRecettes(Model model, long idUtilisateur) {
-    model.addAttribute("recettes", recetteService.listerRecettesParUtilisateur( idUtilisateur));
-    return ("/recettes");
-  }
 
     /**
      * Permet d'afficher sur une page HTML le détail d'une recette renvoie sur la page recettes dédiée
@@ -55,17 +49,16 @@ public class RecetteController {
      * Permet d'afficher sur une page HTML toutes les recettes par utilisateur renvoie sur la page
      * recettes dédiées
      *
-     * @param idUtilisateur
      * @param model
      * @return
      */
-    @GetMapping("/recettes/{idUtilisateur}")
-    public String afficherRecettesParUtilisateur(
-            @PathVariable("idUtilisateur") long idUtilisateur, Model model) {
-        logger.info("Affichage des recettes pour l'utilisateur avec l'id {}", idUtilisateur);
-
+    @GetMapping("/recettes")
+    public String afficherRecettesParUtilisateur( Authentication authentication,
+            Model model) {
+        logger.info("Affichage des recettes pour l'utilisateur avec l'id {}");
+        Optional<Utilisateur> user = utilisateurService.chercherUtilisateurParPseudo(authentication.getName());
         // Assuming recetteService has a method to retrieve recipes by user ID
-        List<Recette> recettes = recetteService.listerRecettesParUtilisateur(idUtilisateur);
+        List<Recette> recettes = recetteService.listerRecettesParUtilisateur(user.get().getIdUtilisateur());
 
         // Add the list of recipes to the model
         model.addAttribute("recettes", recettes);

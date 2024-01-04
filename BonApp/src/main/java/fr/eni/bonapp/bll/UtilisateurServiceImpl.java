@@ -31,5 +31,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public Optional<Utilisateur> chercherUtilisateurParRecette(long idRecette) {
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Utilisateur> chercherUtilisateurParPseudo(String pseudo) {
+        return utilisateurDAO.chercherUtilisateurParPseudo(pseudo);
+    }
 }
 

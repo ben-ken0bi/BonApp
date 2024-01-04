@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/static/css/navbar.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar.css}" />
 
     <title>Navbar</title>
 </head>
@@ -19,16 +19,19 @@
     <a th:href="@{/contact}">Contact</a>
 
     <!-- Ajoutez ces lignes pour gérer la connexion/déconnexion -->
-
-</div>
-</div>
-<div>
     <div th:if="${#authorization.expression('isAuthenticated()')}">
-        <a th:href="@{/logout}">Déconnexion</a>
+        <form method="post" th:action="@{/logout}">
+            <button type="submit">Déconnexion</button>
+        </form>
     </div>
     <div th:unless="${#authorization.expression('isAuthenticated()')}">
         <a th:href="@{/login}">Connexion</a>
     </div>
+
 </div>
+</div>
+
+
 </body>
+
 </html>

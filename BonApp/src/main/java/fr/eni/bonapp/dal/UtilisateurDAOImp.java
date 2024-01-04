@@ -83,6 +83,7 @@ public class UtilisateurDAOImp implements UtilisateurDAO {
             optUtilisateur = Optional.of(utilisateur);
         } catch (DataAccessException dae) {
             logger.error("Aucun utilisateur existe avec le pseudo suivant : {}", pseudo);
+            throw dae;
         }
         return optUtilisateur;
     }

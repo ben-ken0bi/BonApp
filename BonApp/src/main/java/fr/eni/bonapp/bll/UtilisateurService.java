@@ -11,4 +11,7 @@ public interface UtilisateurService {
     List<Utilisateur> listerUtilisateurs();
 
     Optional<Utilisateur> chercherUtilisateurParRecette(long idRecette);
+
+    Optional<Utilisateur> chercherUtilisateurParPseudo(String pseudo);
+
 }
