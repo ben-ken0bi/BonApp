@@ -9,18 +9,19 @@ body {
 }
 
 .navbar {
-    var(--color-primary-300);
+    color: var(--color-primary-300);
     overflow: hidden;
 }
 
-.navbar a {
-    float: right;
-    display: flex;
+.navbar a, .navbar button {
     color: var(--police-contour);
-    align-items: baseline;
-    text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+
+    float: right;
+    display: flex;
+
+    text-align: center;
 }
 
 .navbar img {
@@ -29,6 +30,7 @@ body {
     -moz-border-radius : 75px;
     -webkit-border-radius : 75px;
     border-radius : 75px;
+    margin-left: 50px;
 }
 
 .navbar a:hover {
@@ -37,5 +39,29 @@ body {
 }
 
 .navbar div {
+    height: 100%;
     float: right;
+    align-items: center;
+}
+
+.deconnexion{
+    margin-right:15px;
+    margin-top:33px;
+}
+
+.liens{
+    margin-top:20px;
+    margin-right: 50px;
+}
+
+
+.navbar button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+
 }

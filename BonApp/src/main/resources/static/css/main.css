@@ -8,46 +8,28 @@ body {
     margin: 0;
 }
 
-.comment {
-    display: none;
-    padding-top: 30px;
-}
-#grid {
-    display: none;
-    height: 100vh;
+/*********** Login **********/
+
+.wrapper-login {
+    background-color: #8bc5bb;
 }
 
-#left {
-    background: var(--color-surface-mixed-300);
-}
-#left:hover .comment{
-    display: block;
-}
-.icone{
-    display: inline-block;
-}
-#right {
-    background: var(--bg-primary);
-    border: 3rem solid rgb(0 0 0 / 10%);
+.banner_form {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: wheat;
+    bottom: -5.4%;
 }
 
-/* the magic */
-#grid {
-    transition: 300ms;
-    display: none;
-    grid-template-columns: 48px auto;
-}
-
-#grid:has(#left:hover) {
-    grid-template-columns: 30% auto;
-}
-/* magic + CSS variable */
-#grid {
-    transition: 300ms;
-    display: grid;
-    grid-template-columns: var(--left, 48px) auto;
-}
-
-#grid:has(#left:hover) {
-    --left: 30%;
+.banner_form form {
+    width: 100%;
+    z-index: 4;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 25px;
 }

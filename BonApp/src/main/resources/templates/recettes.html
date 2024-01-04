@@ -1,21 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/recette.css}" />
+    <link rel="stylesheet" th:href="@{/css/listeRecettes.css}" />
     <title>Recettes</title>
 </head>
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
+<div class="grid-container">
+    <div th:each="recette : ${recettes}" class="card text">
 
-<div th:each="recette : ${recettes}">
-    <div class="card">
-        <div th:text="${recette.titre}"></div>
+        <div th:text="${recette.met.nom}" class="titre"></div>
         <div th:src="@{recette.image.id}"></div>
-        <img th:src="@{'/images/recette_default.avif'}" alt="illustration de recette par defaut">
+        <div class="card-img">
+            <a th:href="@{/recette/{id}(id=${recette.getIdRecette()})}">
+                <img th:src="@{'/images/recette_default.avif'}" alt="illustration de recette par defaut" class="img">
+            </a>
+<!--            <img th:src="@{'/images/recette_default.avif'}" alt="illustration de recette par defaut" class="img">-->
+        </div>
+        <div th:text="${recette.titre}"></div>
+
+
+
+
         <div th:text="${recette.etat.libelle}"></div>
-        <div th:text="${recette.met.nom}"></div>
+
     </div>
 </div>
 </body>
