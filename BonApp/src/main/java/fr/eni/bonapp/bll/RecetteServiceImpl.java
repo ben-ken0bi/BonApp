@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RecetteServiceImpl implements RecetteService {
-    public final RecetteDAO recetteDAO;
+    private final RecetteDAO recetteDAO;
 
     RecetteServiceImpl(RecetteDAO recetteDAO) {
         this.recetteDAO = recetteDAO;
@@ -29,5 +29,10 @@ public class RecetteServiceImpl implements RecetteService {
     @Override
     public List<Recette> listerRecettesParUtilisateurMet(long idUtilisateur, long idMet) {
         return recetteDAO.listerRecettesParUtilisateurMet(idUtilisateur, idMet);
+    }
+
+    @Override
+    public List<Recette> listerRecettesParUtilisateurEtat(long idUtilisateur, long idEtat) {
+        return recetteDAO.listerRecettesParUtilisateurEtat(idUtilisateur, idEtat);
     }
 }

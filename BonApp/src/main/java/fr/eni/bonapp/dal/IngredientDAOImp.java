@@ -3,9 +3,16 @@ package fr.eni.bonapp.dal;
 import fr.eni.bonapp.bo.Ingredient;
 import fr.eni.bonapp.bo.Mesure;
 import fr.eni.bonapp.bo.SousCategorie;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,15 +23,10 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
-
 @Repository
 public class IngredientDAOImp implements IngredientDAO {
     Logger logger = LoggerFactory.getLogger(IngredientDAOImp.class);
-    private SousCategorieDAO sousCategorieDAO;
+    private final SousCategorieDAO sousCategorieDAO;
     private final MesureDAO mesureDAO;
 
     IngredientDAOImp(SousCategorieDAO sousCategorieDAO, MesureDAO mesureDAO) {
@@ -73,15 +75,16 @@ public class IngredientDAOImp implements IngredientDAO {
     public Optional<Ingredient> chercherIngredientParId(long idIngredient) {
         String sql =
                 "select id_ingredient, nom,id_sous_categorie from ingredient where id_ingredient =?";
-
-        Ingredient ingredient =
-                jdbcTemplate.queryForObject(sql, new IngredientRowMapper(), idIngredient);
-
-        if (ingredient == null) {
-            logger.error("Aucun ingrédient trouvé à cet id {}", idIngredient);
+        Optional<Ingredient> optIngredient;
+        try {
+            Ingredient ingredient =
+                    jdbcTemplate.queryForObject(sql, new IngredientRowMapper(), idIngredient);
+            optIngredient = Optional.of(ingredient);
+        } catch (DataAccessException dae) {
+            logger.info("Pas d'ingredient trouvé à l'id suivant {}", idIngredient);
             return Optional.empty();
         }
-        return Optional.of(ingredient);
+        return optIngredient;
     }
 
     /**
@@ -103,6 +106,7 @@ public class IngredientDAOImp implements IngredientDAO {
      */
     @Override
     public void ajouterIngredient(Ingredient ingredient) {
+        logger.info("Dans l'ajout d'ingrédient");
         KeyHolder generatedKey = new GeneratedKeyHolder();
         String sql = "INSERT INTO ingredient (nom,id_sous_categorie) VALUES (:nom,:id_sous_categorie)";
 
@@ -122,6 +126,7 @@ public class IngredientDAOImp implements IngredientDAO {
      */
     @Override
     public List<Ingredient> listerIngredientPourRecette(long idRecette) {
+        logger.info("Dans la methode pour lister les ingrédients de la recette id {}",idRecette);
         String sql =
                 "Select re.id_recette_ingredient, re.quantite, re.id_recette,titre,re.id_ingredient,i.nom,re.id_mesure, m.mesure, s.id_sous_categorie, s.nom "
                         + "from recette_ingredient re "

@@ -1,0 +1,113 @@
+@import "main.css";
+
+#recette-details {
+    max-width: 800px;
+    margin: 0 auto; /* Centrez le contenu */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#recette-details h1 {
+    color: #333;
+    text-align: center;
+}
+
+#recette-details p {
+    color: #555;
+}
+
+.test {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+/**************RECETTES**************/
+#wrapper {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1280px;
+    color: var(--color-surface-mixed-100);
+}
+
+.wrapper-center {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1280px;
+    color: var(--color-surface-mixed-100);
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.card {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px 0px;
+    border-radius: 20px;
+    background: var(--color-surface-mixed-100);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+.img {
+    max-height: 350px;
+    width: auto;
+}
+
+.card:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px 0px;
+}
+
+.recette-card_title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--police-principale);
+    font-size: 0.8rem;
+    padding: 10px; /* Ajoutez un peu de marge intérieure pour améliorer l'apparence */
+}
+
+.recette-card_genre {
+    text-align: center;
+    color: var(--police-principale);
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+}
+
+.card:hover .recette-card_recette,
+.card:hover .recette-card_title,
+.card:hover .recette-card_genre {
+    color: var(--color-primary-600);
+}
+
+.recette-card_title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--police-principale);
+    font-size: .8rem;
+}
+
+.recette-card_genre {
+    text-align: center;
+    color: var(--police-principale);
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: .8rem;
+}
+
+.text{
+    text-align: center;
+}

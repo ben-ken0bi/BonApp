@@ -1,16 +1,17 @@
 package fr.eni.bonapp.dal;
 
 import fr.eni.bonapp.bo.Recette;
-
 import java.util.List;
 import java.util.Optional;
 
 public interface RecetteDAO {
-    Optional<Recette> chercherRecetteParId(long idRecette);
+  Optional<Recette> chercherRecetteParId(long idRecette);
 
-    List<Recette> listerRecettesParUtilisateur(long idUtilisateur);
+  List<Recette> listerRecettesParUtilisateur(long idUtilisateur);
 
-    List<Recette> listerRecettesParUtilisateurMet(long idUtilisateur, long idMet);
+  List<Recette> listerRecettesParUtilisateurMet(long idUtilisateur, long idMet);
 
-    void ajouterRecette(Recette recette);
+  List<Recette> listerRecettesParUtilisateurEtat(long idUtilisateur, long idEtat);
+
+  void ajouterRecette(Recette recette);
 }

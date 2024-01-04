@@ -1,0 +1,86 @@
+@import "main.css";
+
+.h1 {
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+.h2 {
+    margin-top: 1%;
+    margin-bottom: 0.25%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px 40px 40px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px 0px;
+    border-radius: 20px;
+    background: var(--color-surface-mixed-100);
+}
+
+/*IMAGE*/
+.detail-recette-image {
+    display: flex;
+    justify-content: center;
+}
+
+.img {
+    max-height: 450px;
+    width: auto;
+}
+
+/*COMMENTAIRES*/
+.comment {
+    display: none;
+    padding-top: 30px;
+}
+
+#grid {
+    display: none;
+    height: 100vh;
+}
+
+#left {
+    background: var(--color-surface-mixed-300);
+}
+
+#left:hover .comment {
+    display: block;
+}
+
+.icone {
+    display: inline-block;
+}
+
+#right {
+    background: var(--bg-primary);
+    border: 3rem solid rgb(0 0 0 / 10%);
+}
+
+/* the magic */
+#grid {
+    transition: 300ms;
+    display: none;
+    grid-template-columns: 48px auto;
+}
+
+#grid:has(#left:hover) {
+    grid-template-columns: 30% auto;
+}
+
+/* magic + CSS variable */
+#grid {
+    transition: 300ms;
+    display: grid;
+    grid-template-columns: var(--left, 48px) auto;
+}
+
+#grid:has(#left:hover) {
+    --left: 30%;
+}
+.liste-commentaire{
+    margin-bottom: 3%;
+}
+
+

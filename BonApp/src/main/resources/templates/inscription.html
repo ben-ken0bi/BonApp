@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" th:href="@{/css/accueil.css}" />
+
+<head>
+    <title>Inscription BonApp'</title>
+</head>
+<body>
+<div class="logo-container">
+    <img src="images/logo.jpg" alt="Logo" class="logo-image">
+</div>
+
+<div class="login-container">
+    <h1>Inscription</h1>
+    <br>
+    <form th:object="${utilisateur}" method="post" th:action="@{'/inscription'}" >
+        <div>
+            <div>
+                <label>Prénom* </label>
+                <input th:field="*{prenom}" required/>
+                <p th:each="error: ${#fields.errors('prenom')}"
+                   th:text="${error}">Validation error</p>
+            </div>
+            <div>
+                <label>Nom* :</label>
+                <input th:field="*{nom}" required/>
+                <p th:each="error : ${#fields.errors('nom')}"
+                   th:text="${error}">Validation error</p>
+            </div>
+            <div>
+                <label>Pseudo* :</label>
+                <input type="text" th:field="*{pseudo}" required/>
+                <p th:each="error : ${#fields.errors('pseudo')}"
+                   th:text="${error}">Validation error</p>
+            </div>
+            <div>
+                <label>Email* :</label>
+                <input type="email" th:field="*{email}" required/>
+                <p th:each="error : ${#fields.errors('email')}"
+                   th:text="${error}">Validation error</p>
+            </div>
+            <div>
+                <label>Mot de passe* :</label>
+                <input type="password" th:field="*{mdp}" required/>
+                <p th:each="error : ${#fields.errors('mdp')}"
+                   th:text="${error}">Validation error</p>
+            </div>
+            <br>
+            <button type="submit">Enregistrer</button>
+        </div>
+    </form>
+    <br>
+    <div class="sinscrire">
+        <a th:href="@{/login}">Se connecter</a>
+    </div>
+</div>
+</body>
+</html>

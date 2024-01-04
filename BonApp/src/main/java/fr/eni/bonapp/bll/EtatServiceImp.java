@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Service
 public class EtatServiceImp implements EtatService {
-    private EtatDAO etatDAO;
+    private final EtatDAO etatDAO;
 
     EtatServiceImp(EtatDAO etatDAO) {
         this.etatDAO = etatDAO;
