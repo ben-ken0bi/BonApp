@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/recette.css}" />
     <title>Recettes</title>
 </head>
 <body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <div th:each="recette : ${recettes}">
     <div class="card">
         <div th:text="${recette.titre}"></div>
-        <div th:text="${recette.image}"></div>
+        <div th:src="@{recette.image.id}"></div>
+        <img th:src="@{'/images/recette_default.avif'}" alt="illustration de recette par defaut">
         <div th:text="${recette.etat.libelle}"></div>
         <div th:text="${recette.met.nom}"></div>
     </div>
 </div>
-
-
-
 </body>
 </html>

@@ -21,8 +21,13 @@ public class UtilisateurDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String pseudo) throws UsernameNotFoundException {
 
-        Optional<Utilisateur> optUtilisateur = utilisateurDAO.chercherUtilisateurParPseudo(pseudo);
-
+        Optional<Utilisateur> optUtilisateur = null;
+    try {
+        optUtilisateur = utilisateurDAO.chercherUtilisateurParPseudo(pseudo);
+    } catch (Exception exc){
+        exc.printStackTrace();
+        throw exc;
+        }
         if (optUtilisateur.isEmpty()) {
             throw new UsernameNotFoundException("pseudo inconnu : " + pseudo);
         }

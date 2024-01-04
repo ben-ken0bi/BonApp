@@ -32,11 +32,14 @@ public class UtilisateurServiceImpl implements UtilisateurService{
         return Optional.empty();
     }
 
-    @Override
-    public void ajouterUtilisateur(Utilisateur utilisateur) {
+   @Override
+   public void ajouterUtilisateur(Utilisateur utilisateur) {
         utilisateurDAO.ajouterUtilisateur(utilisateur);
     }
-
-
+  
+   @Override
+    public Optional<Utilisateur> chercherUtilisateurParPseudo(String pseudo) {
+        return utilisateurDAO.chercherUtilisateurParPseudo(pseudo);
+    }
 }
 

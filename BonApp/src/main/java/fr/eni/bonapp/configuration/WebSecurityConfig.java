@@ -31,7 +31,7 @@ public class WebSecurityConfig {
                                         .authenticated())
                 .exceptionHandling(
                         (exceptionHandling) -> exceptionHandling.accessDeniedPage("/access-denied"))
-                .formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/").permitAll())
+                .formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/recettes").permitAll())
                 .logout(
                         (logout) ->
                                 logout
