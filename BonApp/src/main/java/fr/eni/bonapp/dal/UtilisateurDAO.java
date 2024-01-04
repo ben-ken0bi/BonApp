@@ -12,4 +12,6 @@ public interface UtilisateurDAO {
   List<Utilisateur> listerUtilisateurs();
 
   Optional<Utilisateur> chercherUtilisateurParRecette(long idRecette);
+
+  void ajouterUtilisateur(Utilisateur utilisateur);
 }

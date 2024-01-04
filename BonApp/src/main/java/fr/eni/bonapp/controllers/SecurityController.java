@@ -10,4 +10,10 @@ public class SecurityController {
   public String login() {
     return "login";
   }
-} // END
+
+
+  @GetMapping("/inscription")
+  public String inscription(){
+    return "inscritpion";
+  }
+}

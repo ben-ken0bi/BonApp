@@ -1,16 +1,22 @@
 package fr.eni.bonapp.dal;
 
 import fr.eni.bonapp.bo.Utilisateur;
+
+import java.sql.ResultSet;
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-
-import java.sql.ResultSet;
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class UtilisateurDAOImp implements UtilisateurDAO {
@@ -18,8 +24,8 @@ public class UtilisateurDAOImp implements UtilisateurDAO {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.jdbcTemplate = namedParameterJdbcTemplate.getJdbcTemplate();
     }
 
     /**
@@ -95,5 +101,28 @@ public class UtilisateurDAOImp implements UtilisateurDAO {
     @Override
     public Optional<Utilisateur> chercherUtilisateurParRecette(long idRecette) {
         return Optional.empty();
+    }
+
+    /**
+     * Permet d'ajouter un utilisateur.Utilisée pour l'inscription.
+     */
+    @Override
+    public void ajouterUtilisateur(Utilisateur utilisateur) {
+        logger.info("Dans l'inscription d'un nouvel utilisateur");
+        String sql =
+                "INSERT INTO utilisateur (nom,prenom,pseudo, mdp, email,admin) VALUES (:nom,:prenom,:pseudo,:mdp,:email,:admin)";
+        KeyHolder generatedKey = new GeneratedKeyHolder();
+        SqlParameterSource paramSrc =
+                new MapSqlParameterSource()
+                        .addValue("nom", utilisateur.getNom())
+                        .addValue("prenom", utilisateur.getPrenom())
+                        .addValue("pseudo", utilisateur.getPseudo())
+                        .addValue("mdp", utilisateur.getMdp())
+                        .addValue("email", utilisateur.getEmail())
+                        .addValue("admin", utilisateur.getAdmin());
+
+        utilisateur.setAdmin(false);
+
+        jdbcTemplate.update(sql, paramSrc, generatedKey);
     }
 }
