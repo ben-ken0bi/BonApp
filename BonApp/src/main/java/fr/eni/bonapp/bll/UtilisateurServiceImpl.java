@@ -9,7 +9,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UtilisateurServiceImpl implements UtilisateurService {
+public class UtilisateurServiceImpl implements UtilisateurService{
 
     public final UtilisateurDAO utilisateurDAO;
 
@@ -31,5 +31,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public Optional<Utilisateur> chercherUtilisateurParRecette(long idRecette) {
         return Optional.empty();
     }
+
+    @Override
+    public void ajouterUtilisateur(Utilisateur utilisateur) {
+        utilisateurDAO.ajouterUtilisateur(utilisateur);
+    }
+
+
 }
 
